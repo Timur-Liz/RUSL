@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>От заката к вечности — три произведения В. А. Жуковского</title>
+<meta name="description" content="Образовательный сайт о трёх произведениях В. А. Жуковского: «Сельское кладбище», «Вечер», «Море». Тексты, история создания, анализ, коллажи, подборка музыки и викторины.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+/* ============ ОСНОВА ============ */
+:root{
+  --ink:#090e12;
+  --ink2:#0e171d;
+  --panel:#111c23;
+  --panel2:#16232b;
+  --line:rgba(201,163,82,.22);
+  --parch:#f3ecdc;
+  --parch2:#e6dac0;
+  --inktext:#22282a;
+  --text:#dee8ea;
+  --muted:#8ea2aa;
+  --gold:#c9a352;
+  --gold-l:#ecd9a6;
+  --amb:#4d8fa8;
+  --amb2:#79bccf;
+  --f-display:'Prata',Georgia,'Times New Roman',serif;
+  --f-body:'Spectral',Georgia,serif;
+  --f-ui:'Manrope',system-ui,-apple-system,sans-serif;
+  --shadow:0 24px 60px -28px rgba(0,0,0,.85);
+}
+body[data-amb="cemetery"]{ --amb:#8aa07f; --amb2:#c3d2b6; }
+body[data-amb="evening"] { --amb:#d08a3e; --amb2:#f0c07a; }
+body[data-amb="sea"]     { --amb:#4d8fa8; --amb2:#8fd0e2; }
+body[data-amb="author"]  { --amb:#c9a352; --amb2:#ecd9a6; }
+body[data-amb="quiz"]    { --amb:#a56b8a; --amb2:#dca9c2; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{
+  margin:0;background:var(--ink);color:var(--text);
+  font-family:var(--f-body);font-size:17px;line-height:1.72;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  transition:background-color 1.2s ease;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+::selection{background:var(--amb);color:#07110f}
+
+/* ============ ФОНОВЫЕ СЛОИ ============ */
+#ambient{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#glow{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(1100px 620px at 78% -8%, color-mix(in srgb, var(--amb) 34%, transparent), transparent 62%),
+    radial-gradient(900px 700px at 6% 104%, color-mix(in srgb, var(--amb2) 16%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(9,14,18,.15) 0%, rgba(9,14,18,.72) 55%, rgba(9,14,18,.9) 100%);
+  transition:background 1.4s ease;
+}
+#grain{
+  position:fixed;inset:-120%;z-index:2;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 7s steps(6) infinite;
+}
+@keyframes grainShift{
+  0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}
+  60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}100%{transform:translate(0,0)}
+}
+.wrap{position:relative;z-index:3}
+
+/* ============ ШАПКА ============ */
+#topbar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;gap:22px;
+  padding:12px clamp(14px,3vw,34px);
+  background:rgba(8,12,16,.62);backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom:1px solid rgba(201,163,82,.16);
+  transition:padding .35s ease, background .35s ease;
+}
+#topbar.small{padding:7px clamp(14px,3vw,34px);background:rgba(8,12,16,.88)}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
+.brand .seal{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--gold);color:var(--gold-l);font-family:var(--f-display);font-size:15px;
+  background:radial-gradient(circle at 32% 28%, rgba(201,163,82,.3), transparent 68%);
+  box-shadow:0 0 22px -6px var(--gold);
+}
+.brand b{font-family:var(--f-display);font-size:15px;letter-spacing:.06em;color:#f0e7d4;font-weight:400}
+.brand small{display:block;font-family:var(--f-ui);font-size:9.5px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase;margin-top:1px}
+#nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+#nav a{
+  font-family:var(--f-ui);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:3px;position:relative;transition:.28s;
+}
+#nav a:hover{color:var(--gold-l);background:rgba(201,163,82,.09)}
+#nav a.on{color:#0d1417;background:var(--gold)}
+#bar{position:fixed;top:0;left:0;height:2px;z-index:61;width:0%;
+  background:linear-gradient(90deg,var(--amb),var(--gold-l));box-shadow:0 0 12px var(--amb)}
+#burger{display:none;background:none;border:1px solid var(--line);color:var(--gold-l);
+  width:38px;height:34px;border-radius:4px;cursor:pointer;margin-left:auto}
+
+/* ============ ТИПОГРАФИКА ============ */
+.kicker{font-family:var(--f-ui);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:0}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.08;margin:0}
+.h-sec{font-size:clamp(34px,5.4vw,66px);color:#f4ece0;letter-spacing:-.01em}
+.h-sub{font-family:var(--f-ui);font-weight:300;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(17px,1.5vw,20.5px);color:#c6d3d6;font-weight:300;line-height:1.72}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.55}
+.orn{display:flex;align-items:center;gap:14px;color:var(--gold);opacity:.7}
+.orn:before,.orn:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.orn span{font-size:15px}
+
+/* ============ ГЕРОЙ ============ */
+#hero{min-height:100svh;display:flex;align-items:center;padding:120px clamp(14px,3vw,34px) 60px}
+.hero-grid{width:100%;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1.18fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hero-years{display:flex;align-items:baseline;gap:12px;font-family:var(--f-ui);font-size:12px;letter-spacing:.3em;color:var(--muted)}
+.hero-years i{font-style:normal;color:var(--gold);font-size:26px;font-family:var(--f-display)}
+#hero h1{font-size:clamp(44px,7.6vw,104px);margin:16px 0 6px;color:#f6efe2;text-shadow:0 18px 50px rgba(0,0,0,.6)}
+#hero h1 em{font-style:italic;color:var(--gold-l);display:block;font-size:.52em;letter-spacing:.01em;margin-top:.12em}
+.hero-old{font-family:var(--f-display);font-size:15px;letter-spacing:.22em;color:var(--amb2);opacity:.8;margin-bottom:22px}
+.typeline{
+  border-left:2px solid var(--amb);padding:6px 0 6px 18px;margin:26px 0;min-height:76px;
+  font-style:italic;font-size:clamp(17px,1.7vw,22px);color:#e6ded0;
+}
+.typeline .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:9px}
+.caret{display:inline-block;width:9px;background:var(--amb2);animation:blink 1s steps(2) infinite;color:transparent}
+@keyframes blink{50%{opacity:0}}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:2px;cursor:pointer;
+  font-family:var(--f-ui);font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;font-weight:600;
+  text-decoration:none;border:1px solid var(--gold);color:#0c1114;background:var(--gold);position:relative;overflow:hidden;
+  transition:.3s cubic-bezier(.2,.8,.2,1);
+}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:translateX(-120%);transition:transform .7s}
+.btn:hover:after{transform:translateX(120%)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -16px var(--gold)}
+.btn.ghost{background:transparent;color:var(--gold-l);border-color:rgba(201,163,82,.5)}
+.btn.ghost:hover{border-color:var(--gold);color:#0c1114;background:var(--gold-l)}
+.btn.act{background:var(--amb);border-color:var(--amb);color:#08110f;box-shadow:0 0 30px -8px var(--amb)}
+.btn.act:after{animation:sweep 2.6s linear infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+
+/* триптих */
+.triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,20px);align-items:end}
+.plate{
+  position:relative;display:block;text-decoration:none;cursor:pointer;border:0;padding:0;background:none;
+  text-align:left;transform:translateY(var(--ty,0)) rotate(var(--rot,0deg));
+  transition:transform .55s cubic-bezier(.2,.8,.2,1), filter .5s;filter:saturate(.82) contrast(1.02);
+}
+.plate:hover{transform:translateY(calc(var(--ty,0px) - 14px)) rotate(0deg);filter:saturate(1.08) contrast(1.06)}
+.plate .frame{position:relative;overflow:hidden;border:1px solid rgba(233,214,166,.28);background:#0b1116;box-shadow:var(--shadow)}
+.plate:nth-child(1) .frame{aspect-ratio:3/4.35}
+.plate:nth-child(2) .frame{aspect-ratio:3/4.9}
+.plate:nth-child(3) .frame{aspect-ratio:3/4.35}
+.plate img{width:100%;height:100%;object-fit:cover;opacity:.62;transition:transform 1.3s cubic-bezier(.2,.8,.2,1),opacity .6s}
+.plate:hover img{transform:scale(1.09);opacity:.82}
+.plate .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,14,18,.25) 0%,rgba(9,14,18,.55) 45%,rgba(9,14,18,.95) 100%)}
+.plate .num{position:absolute;top:10px;left:12px;font-family:var(--f-display);font-size:15px;color:var(--gold-l);opacity:.9;letter-spacing:.1em}
+.plate .pl-body{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 16px}
+.plate .yr{font-family:var(--f-ui);font-size:9.5px;letter-spacing:.26em;color:var(--amb2);text-transform:uppercase}
+.plate h3{font-size:clamp(16px,1.5vw,22px);color:#f4ece0;margin:5px 0 8px}
+.plate .peek{
+  font-style:italic;font-size:13.5px;line-height:1.5;color:#cfd8d6;
+  max-height:0;opacity:0;overflow:hidden;transition:max-height .55s ease,opacity .45s ease;
+}
+.plate:hover .peek{max-height:120px;opacity:1}
+.plate .go{font-family:var(--f-ui);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-top:10px;display:flex;align-items:center;gap:7px}
+.plate .go i{font-style:normal;transition:transform .4s}
+.plate:hover .go i{transform:translateX(6px)}
+.scrollhint{margin-top:44px;display:flex;align-items:center;gap:12px;font-family:var(--f-ui);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.scrollhint b{display:block;width:1px;height:46px;background:linear-gradient(180deg,var(--gold),transparent);animation:drop 2.4s ease-in-out infinite}
+@keyframes drop{0%,100%{transform:scaleY(.35);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* ============ СЕКЦИИ ============ */
+section.blk{padding:clamp(64px,8vw,130px) clamp(14px,3vw,34px);position:relative}
+.inner{max-width:1320px;margin:0 auto}
+.sechead{display:flex;align-items:flex-end;gap:clamp(14px,3vw,40px);margin-bottom:clamp(30px,4vw,58px);flex-wrap:wrap}
+.sechead .rn{
+  font-family:var(--f-display);font-size:clamp(60px,9vw,140px);line-height:.78;color:transparent;
+  -webkit-text-stroke:1px rgba(233,214,166,.34);flex-shrink:0;
+}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+/* ============ АВТОР ============ */
+.author-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(26px,4vw,64px);align-items:start}
+.portrait{position:relative;padding:14px 14px 54px;background:linear-gradient(150deg,#1b2329,#0d1418);border:1px solid var(--line);box-shadow:var(--shadow);transform:rotate(-1.1deg);transition:transform .6s}
+.portrait:hover{transform:rotate(0deg) translateY(-6px)}
+.portrait img{filter:sepia(.28) contrast(1.06) brightness(.96);width:100%;aspect-ratio:890/1212;object-fit:cover;background:#141c20}
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;font-family:var(--f-ui);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;line-height:1.6}
+.portrait .corner{position:absolute;width:20px;height:20px;border:1px solid var(--gold);opacity:.7}
+.portrait .c1{top:6px;left:6px;border-right:0;border-bottom:0}
+.portrait .c2{top:6px;right:6px;border-left:0;border-bottom:0}
+.portrait .c3{bottom:6px;left:6px;border-right:0;border-top:0}
+.portrait .c4{bottom:6px;right:6px;border-left:0;border-top:0}
+
+.bio p{margin:0 0 16px;color:#c9d5d8;font-weight:300}
+.bio p b{color:#f0e8da;font-weight:500}
+.dropcap:first-letter{
+  font-family:var(--f-display);float:left;font-size:64px;line-height:.82;padding:6px 12px 0 0;color:var(--gold);
+}
+.quotebig{
+  margin:30px 0;padding:22px 26px;border-left:2px solid var(--amb);background:linear-gradient(90deg,color-mix(in srgb,var(--amb) 12%,transparent),transparent 78%);
+  font-style:italic;font-size:clamp(18px,1.8vw,23px);color:#efe7d8;line-height:1.62;
+}
+.quotebig cite{display:block;margin-top:12px;font-style:normal;font-family:var(--f-ui);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* хронология */
+.tl{margin-top:34px;border-top:1px solid var(--line)}
+.tl-item{border-bottom:1px solid rgba(201,163,82,.14);cursor:pointer;transition:background .35s}
+.tl-item:hover{background:rgba(201,163,82,.05)}
+.tl-item.open{background:rgba(201,163,82,.08)}
+.tl-head{display:flex;gap:18px;align-items:baseline;padding:15px 8px}
+.tl-yr{font-family:var(--f-display);font-size:20px;color:var(--gold-l);min-width:78px;flex-shrink:0}
+.tl-t{font-family:var(--f-ui);font-size:13.5px;letter-spacing:.02em;color:#e2e9e6;font-weight:500;flex:1}
+.tl-plus{color:var(--amb2);font-size:19px;transition:transform .4s;flex-shrink:0}
+.tl-item.open .tl-plus{transform:rotate(45deg)}
+.tl-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.2,.8,.2,1)}
+.tl-body p{margin:0;padding:0 8px 20px 104px;color:var(--muted);font-size:15.5px;font-weight:300;line-height:1.68}
+@media(max-width:640px){.tl-body p{padding-left:8px}}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.fact{background:#0c1317;padding:20px 18px;transition:background .4s}
+.fact:hover{background:#141f26}
+.fact b{display:block;font-family:var(--f-display);font-size:clamp(24px,2.6vw,34px);color:var(--gold-l);line-height:1}
+.fact span{display:block;font-family:var(--f-ui);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:9px;line-height:1.5}
+
+/* ============ ПРОИЗВЕДЕНИЯ ============ */
+.work{border-top:1px solid rgba(201,163,82,.18)}
+.workhead{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,.62fr);gap:clamp(18px,3vw,44px);align-items:center;margin-bottom:36px}
+.workhead .rn{font-family:var(--f-display);font-size:clamp(74px,11vw,168px);line-height:.72;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--amb2) 55%,transparent)}
+.workhead h2{font-size:clamp(36px,6.4vw,82px);color:#f6efe2;margin:8px 0 12px}
+.workhead .epi{font-style:italic;color:#cdd8d6;font-size:16.5px;max-width:52ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{
+  font-family:var(--f-ui);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  padding:7px 12px;border:1px solid color-mix(in srgb,var(--amb) 45%,transparent);color:#dfe8e6;
+  background:color-mix(in srgb,var(--amb) 11%,transparent);border-radius:2px;transition:.3s;
+}
+.chip:hover{background:color-mix(in srgb,var(--amb) 24%,transparent);transform:translateY(-2px)}
+.chip b{color:var(--amb2);font-weight:700}
+.headart{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
+.headart img{width:100%;height:100%;object-fit:cover;opacity:.5;transition:transform 1.2s,opacity .6s}
+.headart:hover img{transform:scale(1.06);opacity:.68}
+.headart:after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,color-mix(in srgb,var(--amb) 42%,transparent),rgba(9,14,18,.8))}
+
+/* вкладки */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:0;margin-bottom:34px}
+.tab{
+  background:none;border:1px solid transparent;border-bottom:0;cursor:pointer;
+  padding:12px 20px;color:var(--muted);font-family:var(--f-ui);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  position:relative;top:1px;transition:.3s;white-space:nowrap;border-radius:3px 3px 0 0;
+}
+.tab:hover{color:var(--gold-l);background:rgba(201,163,82,.07)}
+.tab[aria-selected="true"]{color:#0c1114;background:var(--amb);border-color:var(--amb);font-weight:700}
+.panel{display:none;animation:fadeUp .6s cubic-bezier(.2,.8,.2,1)}
+.panel.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* пергамент с текстом */
+.reader-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px;font-family:var(--f-ui);font-size:11px;letter-spacing:.1em}
+.mini{
+  background:rgba(255,255,255,.04);border:1px solid var(--line);color:#d7e0de;padding:8px 13px;cursor:pointer;
+  border-radius:2px;font-family:var(--f-ui);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;transition:.28s;
+}
+.mini:hover{border-color:var(--gold);color:var(--gold-l);background:rgba(201,163,82,.12)}
+.mini.act{background:var(--gold);color:#0c1114;border-color:var(--gold);font-weight:700}
+.scrollbox{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0) 22%),
+    linear-gradient(150deg,var(--parch),var(--parch2));
+  color:var(--inktext);padding:clamp(26px,4vw,58px) clamp(20px,4vw,64px);
+  box-shadow:var(--shadow), inset 0 0 90px rgba(120,95,50,.16);
+  border:1px solid rgba(120,95,50,.28);position:relative;max-height:min(74vh,860px);overflow-y:auto;
+  background-attachment:local;
+}
+.scrollbox:before{content:"";position:absolute;left:clamp(14px,3vw,40px);top:0;bottom:0;width:1px;background:rgba(140,60,60,.22)}
+.scrollbox::-webkit-scrollbar{width:9px}
+.scrollbox::-webkit-scrollbar-thumb{background:rgba(120,95,50,.4);border-radius:9px}
+.scrollbox::-webkit-scrollbar-track{background:rgba(120,95,50,.1)}
+.ptitle{font-family:var(--f-display);font-size:clamp(26px,3.4vw,40px);margin:0 0 6px;color:#2b2118}
+.psub{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#7d6b4c;margin-bottom:30px}
+.poem{font-family:var(--f-body);font-size:var(--pfz,19px);line-height:1.68;transition:font-size .25s}
+.poem .st{margin:0 0 calc(var(--pfz,19px)*1.05);padding-left:var(--padl,0px);position:relative;cursor:default;transition:background .3s,color .3s;border-radius:3px}
+.poem .st:hover{background:rgba(201,163,82,.16)}
+.poem .st.speaking{background:rgba(190,90,60,.14);box-shadow:inset 3px 0 0 #b2543c}
+.poem .st .ln{display:block}
+.poem.num .st{counter-increment:stz}
+.poem.num .st:before{
+  content:counter(stz);position:absolute;left:-40px;top:.32em;font-family:var(--f-ui);font-size:11px;color:#a08a60;
+}
+.poem.num{padding-left:44px;counter-reset:stz}
+.poem .st:first-child .ln:first-child:first-letter{
+  font-family:var(--f-display);font-size:3.1em;line-height:.82;float:left;padding:6px 10px 0 0;color:#7a2f22;
+}
+.pnote{margin-top:26px;padding-top:16px;border-top:1px solid rgba(120,95,50,.3);font-family:var(--f-ui);font-size:12px;color:#6f5f42;letter-spacing:.02em}
+
+/* история */
+.two{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(22px,3vw,48px);align-items:start}
+.story h3{font-size:clamp(22px,2.4vw,30px);color:var(--gold-l);margin:30px 0 10px}
+.story h3:first-child{margin-top:0}
+.story p{margin:0 0 14px;color:#c6d2d5;font-weight:300}
+.story p b{color:#f2ead9;font-weight:500}
+.aside{border:1px solid var(--line);background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01));padding:22px}
+.aside h4{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--amb2);margin-bottom:14px;font-weight:700}
+.aside ul{margin:0;padding:0;list-style:none}
+.aside li{padding:9px 0;border-bottom:1px dashed rgba(201,163,82,.18);font-size:15px;color:#c9d5d8;display:flex;gap:11px}
+.aside li:last-child{border-bottom:0}
+.aside li span{color:var(--gold);font-family:var(--f-display);font-size:13px;flex-shrink:0;padding-top:2px}
+
+/* анализ */
+.an-block{border-left:2px solid color-mix(in srgb,var(--amb) 60%,transparent);padding:2px 0 2px 22px;margin-bottom:30px}
+.an-block h3{font-size:clamp(20px,2.2vw,27px);color:var(--gold-l);margin-bottom:10px}
+.an-block p{margin:0 0 12px;color:#c6d2d5;font-weight:300}
+.an-block ol{list-style:decimal}
+.an-block ol li::marker{color:var(--amb2);font-family:var(--f-ui);font-size:12px}
+.pillrow{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 0}
+.pill{padding:8px 15px;border-radius:99px;border:1px solid color-mix(in srgb,var(--amb2) 42%,transparent);
+  font-family:var(--f-ui);font-size:11.5px;letter-spacing:.05em;color:#e0e8e6;background:color-mix(in srgb,var(--amb) 9%,transparent);transition:.3s}
+.pill:hover{transform:translateY(-2px);background:color-mix(in srgb,var(--amb) 22%,transparent)}
+.comp{display:grid;gap:12px;margin-top:8px}
+.comp-step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;padding:14px 16px;border:1px solid var(--line);background:rgba(255,255,255,.025);transition:.35s}
+.comp-step:hover{background:color-mix(in srgb,var(--amb) 11%,transparent);transform:translateX(6px)}
+.comp-step b{font-family:var(--f-display);color:var(--amb2);font-size:22px;line-height:1}
+.comp-step span{color:#c6d2d5;font-weight:300;font-size:16px}
+.dev{border:1px solid var(--line);margin-bottom:1px;background:rgba(255,255,255,.02);transition:.35s}
+.dev:hover{background:rgba(255,255,255,.05)}
+.dev button{width:100%;background:none;border:0;cursor:pointer;text-align:left;padding:16px 18px;display:flex;gap:16px;align-items:center;color:#e7ecea;font-family:var(--f-ui);font-size:13px;letter-spacing:.06em}
+.dev button i{margin-left:auto;font-style:normal;color:var(--amb2);transition:transform .4s;font-size:17px}
+.dev.open button i{transform:rotate(180deg)}
+.dev .body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.2,.8,.2,1)}
+.dev .body div{padding:0 18px 18px;color:var(--muted);font-size:15.6px;font-weight:300}
+.dev .body q{display:block;margin-top:10px;font-style:italic;color:var(--gold-l);font-size:16.5px;border-left:2px solid var(--amb);padding-left:14px}
+
+/* коллаж */
+.collage{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.6vw,20px)}
+.tile{position:relative;cursor:pointer;background:#f3ecdc;padding:10px 10px 34px;box-shadow:0 18px 40px -20px rgba(0,0,0,.9);
+  transform:rotate(var(--r,0deg));transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .5s;border:1px solid rgba(0,0,0,.08)}
+.tile:hover{transform:rotate(0deg) translateY(-8px) scale(1.015);box-shadow:0 30px 60px -22px rgba(0,0,0,.95);z-index:5}
+.tile:before{
+  content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%) rotate(var(--tr,-2deg));
+  width:88px;height:22px;background:color-mix(in srgb,var(--amb) 55%,#fff);opacity:.42;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.tile img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) contrast(1.05) saturate(.92);aspect-ratio:4/3}
+.tile figcaption{position:absolute;left:12px;right:12px;bottom:9px;font-family:var(--f-ui);font-size:10px;letter-spacing:.06em;color:#5d5341;line-height:1.45}
+.tile.q{background:linear-gradient(150deg,#1c262c,#0e161a);border-color:var(--line);display:grid;place-items:center;padding:26px;cursor:default}
+.tile.q:before{display:none}
+.tile.q p{font-family:var(--f-display);font-style:italic;color:var(--gold-l);font-size:clamp(15px,1.5vw,21px);line-height:1.5;margin:0;text-align:center}
+.t-a{grid-column:span 3}.t-b{grid-column:span 2}.t-c{grid-column:span 4}.t-d{grid-column:span 2}.t-e{grid-column:span 2}.t-f{grid-column:span 2}
+@media(max-width:900px){.collage{grid-template-columns:repeat(2,1fr)}.t-a,.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:span 1}}
+
+/* музыка */
+.mus-note{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px dashed color-mix(in srgb,var(--amb) 50%,transparent);
+  background:color-mix(in srgb,var(--amb) 8%,transparent);margin-bottom:22px;font-size:15px;color:#cfe0e0}
+.mus-note b{color:var(--gold-l)}
+.track{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 16px;
+  border:1px solid var(--line);border-bottom:0;background:rgba(255,255,255,.02);transition:.35s;position:relative;overflow:hidden}
+.track:last-of-type{border-bottom:1px solid var(--line)}
+.track:hover{background:color-mix(in srgb,var(--amb) 12%,transparent);transform:translateX(5px)}
+.eq{display:flex;align-items:flex-end;gap:3px;height:30px;width:26px;flex-shrink:0}
+.eq i{display:block;width:4px;height:22%;background:var(--amb2);border-radius:1px;opacity:.55;transition:opacity .3s}
+.track:hover .eq i{opacity:1;animation:eq .9s ease-in-out infinite}
+.track:hover .eq i:nth-child(2){animation-delay:.15s}
+.track:hover .eq i:nth-child(3){animation-delay:.3s}
+.track:hover .eq i:nth-child(4){animation-delay:.45s}
+@keyframes eq{0%,100%{height:20%}50%{height:96%}}
+.track .art{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amb2)}
+.track .ttl{font-family:var(--f-display);font-size:clamp(18px,2vw,24px);color:#f2ead9;margin:3px 0 6px}
+.track .why{font-size:15px;color:var(--muted);font-weight:300;max-width:70ch}
+.track .yr{font-family:var(--f-ui);font-size:11px;color:var(--gold);letter-spacing:.1em}
+.track .links{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+.lnk{font-family:var(--f-ui);font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  padding:6px 11px;border:1px solid var(--line);color:#d5ded9;transition:.3s;border-radius:2px}
+.lnk:hover{background:var(--gold);color:#0c1114;border-color:var(--gold)}
+.bonus{margin-top:26px;padding:18px 20px;border-left:2px solid var(--gold);background:rgba(201,163,82,.07);font-size:15.5px;color:#cdd8d6;font-weight:300}
+.bonus b{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);display:block;margin-bottom:8px}
+
+/* ============ ТАБЛИЦА ============ */
+.ctable{width:100%;border-collapse:collapse;font-size:15.5px}
+.ctable th,.ctable td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.ctable thead th{font-family:var(--f-display);font-size:clamp(17px,1.8vw,23px);color:var(--gold-l);font-weight:400;border-bottom:1px solid var(--gold)}
+.ctable tbody th{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amb2);font-weight:700;width:190px}
+.ctable tr{transition:background .3s}
+.ctable tbody tr:hover{background:rgba(201,163,82,.07)}
+.ctable td{color:#c8d4d7;font-weight:300}
+.scroll-x{overflow-x:auto}
+
+/* ============ СЛОВАРЬ ============ */
+.glossbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+#glossSearch{
+  flex:1;min-width:230px;background:rgba(255,255,255,.045);border:1px solid var(--line);color:#eef3f1;
+  padding:13px 16px;font-family:var(--f-body);font-size:16px;border-radius:2px;outline:none;transition:.3s;
+}
+#glossSearch::placeholder{color:#6f828a;font-style:italic}
+#glossSearch:focus{border-color:var(--gold);background:rgba(201,163,82,.09);box-shadow:0 0 0 3px rgba(201,163,82,.1)}
+.gfilters{display:flex;gap:6px;flex-wrap:wrap}
+.gcount{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.glossgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px}
+.gword{
+  position:relative;border:1px solid var(--line);padding:20px 20px 18px;cursor:default;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.008));
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
+}
+.gword:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--gc) 65%,transparent);background:color-mix(in srgb,var(--gc) 11%,transparent)}
+.gword:after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gc);opacity:.35;transition:opacity .4s,width .4s}
+.gword:hover:after{opacity:1;width:4px}
+.gword b{display:block;font-family:var(--f-display);font-size:22px;color:#f4ece0;font-weight:400;letter-spacing:.01em}
+.gword .gm{margin:8px 0 14px;color:#c3cfd2;font-size:15.4px;font-weight:300;line-height:1.6}
+.gword .gq{font-style:italic;font-size:14.4px;color:var(--gc);border-top:1px dashed rgba(201,163,82,.22);padding-top:10px;line-height:1.55}
+.gword .gtag{position:absolute;top:14px;right:14px;font-family:var(--f-ui);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gc);opacity:.85}
+
+/* ============ ВИКТОРИНА ============ */
+.qcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.qcard{position:relative;text-align:left;cursor:pointer;padding:26px 24px;border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));transition:.4s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+.qcard:hover{transform:translateY(-7px);border-color:color-mix(in srgb,var(--c) 70%,transparent);box-shadow:0 26px 50px -24px color-mix(in srgb,var(--c) 60%,transparent)}
+.qcard:before{content:"";position:absolute;inset:auto -30% -60% auto;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--c) 45%,transparent),transparent 70%);transition:.6s}
+.qcard:hover:before{transform:scale(1.35)}
+.qcard .rn2{font-family:var(--f-display);font-size:13px;letter-spacing:.3em;color:var(--c)}
+.qcard h3{font-size:clamp(21px,2.3vw,28px);color:#f3ece0;margin:9px 0 8px}
+.qcard p{margin:0;font-size:14.5px;color:var(--muted);font-weight:300}
+.qcard .st{margin-top:16px;font-family:var(--f-ui);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
+
+.quiz-stage{border:1px solid var(--line);background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.012));padding:clamp(22px,3.4vw,44px);margin-top:30px;display:none}
+.quiz-stage.on{display:block;animation:fadeUp .5s}
+.qtop{display:flex;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.qcount{font-family:var(--f-ui);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.qprogress{flex:1;height:3px;background:rgba(255,255,255,.09);min-width:120px;overflow:hidden}
+.qprogress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--qamb),var(--gold-l));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.qtext{font-family:var(--f-display);font-size:clamp(20px,2.6vw,32px);color:#f4ece0;line-height:1.32;margin-bottom:24px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;cursor:pointer;padding:16px 18px;border:1px solid var(--line);background:rgba(255,255,255,.025);
+  color:#dbe4e2;font-family:var(--f-body);font-size:16.5px;display:flex;gap:14px;align-items:flex-start;transition:.3s;border-radius:2px}
+.opt:hover:not(:disabled){border-color:var(--qamb);background:color-mix(in srgb,var(--qamb) 14%,transparent);transform:translateX(5px)}
+.opt k{font-family:var(--f-display);color:var(--qamb);font-size:15px;flex-shrink:0;padding-top:1px}
+.opt.right{border-color:#69b07c;background:rgba(105,176,124,.17);color:#eaf6ec}
+.opt.right k{color:#8fd6a2}
+.opt.wrong{border-color:#c4695f;background:rgba(196,105,95,.15);color:#f6e2df}
+.opt.wrong k{color:#e79a90}
+.opt:disabled{cursor:default}
+.expl{margin-top:18px;padding:16px 18px;border-left:2px solid var(--qamb);background:color-mix(in srgb,var(--qamb) 10%,transparent);
+  color:#d6e0dd;font-size:15.8px;font-weight:300;display:none;animation:fadeUp .45s}
+.expl.on{display:block}
+.expl b{font-family:var(--f-ui);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--qamb);display:block;margin-bottom:7px}
+.qnav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap}
+.result{text-align:center;padding:20px 0}
+.result .medal{font-family:var(--f-display);font-size:clamp(58px,9vw,104px);color:var(--gold-l);line-height:1}
+.result .score{font-family:var(--f-ui);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.result .verdict{font-family:var(--f-display);font-size:clamp(22px,3vw,34px);color:#f4ece0;margin-bottom:10px}
+.result p{color:#c3cfd2;font-weight:300;max-width:60ch;margin:0 auto 24px}
+
+/* ============ ПРОЧЕЕ ============ */
+.dock{position:fixed;right:18px;bottom:18px;z-index:55;display:flex;flex-direction:column;gap:9px;align-items:flex-end}
+.dockbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(10,15,19,.85);
+  color:var(--gold-l);cursor:pointer;display:grid;place-items:center;font-size:16px;transition:.35s;backdrop-filter:blur(8px)}
+.dockbtn:hover{background:var(--gold);color:#0c1114;transform:translateY(-3px)}
+.dockbtn.on{background:var(--amb);color:#0b1114;border-color:var(--amb)}
+#toTop{opacity:0;pointer-events:none}
+#toTop.show{opacity:1;pointer-events:auto}
+.soundwave{display:flex;gap:2px;align-items:flex-end;height:16px}
+.soundwave i{width:2px;background:currentColor;height:30%;border-radius:1px}
+.dockbtn.on .soundwave i{animation:eq .8s ease-in-out infinite}
+.dockbtn.on .soundwave i:nth-child(2){animation-delay:.2s}
+.dockbtn.on .soundwave i:nth-child(3){animation-delay:.4s}
+
+footer{border-top:1px solid var(--line);padding:56px clamp(14px,3vw,34px) 40px;background:rgba(6,10,13,.6);position:relative;z-index:3}
+.fgrid{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(30px,5vw,72px);align-items:start}
+.authors{display:grid;grid-template-columns:repeat(auto-fit,minmax(214px,1fr));gap:2px 22px}
+.authors li{
+  counter-increment:auth;display:flex;align-items:baseline;gap:11px;
+  padding:9px 0;border-bottom:1px dashed rgba(201,163,82,.18);
+  font-family:var(--f-body);font-size:16px;color:#d6e0dd;letter-spacing:.01em;transition:.35s;
+}
+.authors li:hover{color:var(--gold-l);border-color:var(--gold);transform:translateX(4px)}
+.authors li:before{
+  content:counter(auth,decimal-leading-zero);font-family:var(--f-display);font-size:12px;
+  color:var(--gold);opacity:.75;flex-shrink:0;
+}
+.authors{counter-reset:auth}
+footer h4{font-family:var(--f-ui);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:700}
+footer p,footer li{font-size:14.5px;color:var(--muted);font-weight:300;line-height:1.7}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{padding:4px 0}
+footer a{text-decoration:none;border-bottom:1px solid transparent;transition:.3s}
+footer a:hover{color:var(--gold-l);border-color:var(--gold)}
+.fbot{max-width:1320px;margin:38px auto 0;padding-top:20px;border-top:1px solid rgba(201,163,82,.14);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--f-ui);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#6d7f87}
+
+/* лайтбокс */
+#lb{position:fixed;inset:0;z-index:80;display:none;place-items:center;background:rgba(5,8,10,.93);backdrop-filter:blur(9px);padding:26px}
+#lb.on{display:grid;animation:fadeUp .35s}
+#lb img{max-width:min(1100px,92vw);max-height:76vh;object-fit:contain;border:1px solid var(--line);box-shadow:0 40px 90px -30px #000}
+#lb .cap{max-width:min(1100px,92vw);margin-top:16px;font-family:var(--f-ui);font-size:12.5px;letter-spacing:.06em;color:#c8d3d2;text-align:center}
+#lb .x{position:absolute;top:20px;right:22px;background:none;border:1px solid var(--line);color:var(--gold-l);width:42px;height:42px;cursor:pointer;font-size:19px;border-radius:50%}
+#lb .x:hover{background:var(--gold);color:#0c1114}
+#lb .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,15,19,.7);border:1px solid var(--line);color:var(--gold-l);width:46px;height:64px;cursor:pointer;font-size:22px}
+#lb .nav:hover{background:var(--gold);color:#0c1114}
+#lb .prev{left:14px}#lb .next{right:14px}
+
+@media(max-width:1080px){
+  .hero-grid,.author-grid,.two{grid-template-columns:minmax(0,1fr)}
+  .workhead{grid-template-columns:auto minmax(0,1fr)}
+  .headart{grid-column:1/-1;aspect-ratio:16/7}
+  .triptych{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:860px){
+  .gcount{margin-left:0;width:100%}
+  #nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(8,12,16,.97);flex-direction:column;padding:12px;border-bottom:1px solid var(--line)}
+  #nav.open{display:flex}
+  #burger{display:block}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .comp-step{grid-template-columns:44px minmax(0,1fr)}
+}
+@media(max-width:620px){
+  .triptych{grid-template-columns:minmax(0,1fr);gap:14px}
+  .plate{transform:none!important}
+  .plate .peek{max-height:120px;opacity:1}
+  .workhead{grid-template-columns:minmax(0,1fr)}
+  .workhead .rn{font-size:64px}
+  body{font-size:16px}
+}
+</style>
+</head>
+<body data-amb="author">
+
+<canvas id="ambient"></canvas>
+<div id="glow"></div>
+<div id="grain"></div>
+<div id="bar"></div>
+
+<header id="topbar">
+  <a class="brand" href="#hero">
+    <span class="seal">Ж</span>
+    <span><b>ЖУКОВСКИЙ</b><small>три элегии · 1802—1822</small></span>
+  </a>
+  <button id="burger" aria-label="Меню">≡</button>
+  <nav id="nav">
+    <a href="#author">Автор</a>
+    <a href="#w-cemetery">Сельское кладбище</a>
+    <a href="#w-evening">Вечер</a>
+    <a href="#w-sea">Море</a>
+    <a href="#compare">Сравнение</a>
+    <a href="#gloss">Словарь</a>
+    <a href="#quiz">Викторины</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<!-- ================= ГЕРОЙ ================= -->
+<section id="hero" data-ambkey="author">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-years"><i>✦</i><span>1783 — 1852</span><i>✦</i></div>
+      <h1>От заката<br>к вечности<em>Василий Андреевич Жуковский</em></h1>
+      <div class="hero-old">Василій Андреевичъ Жуковскій · поэтъ, переводчикъ, наставникъ</div>
+      <p class="lede">Три текста, с которых начинается русская элегия: сумеречное <b>«Сельское кладбище»</b> (1802), золотой <b>«Вечер»</b> (1806) и безмолвное <b>«Море»</b> (1822). Внутри — полные тексты, история создания, разбор, коллажи, музыкальные пары и три отдельные викторины.</p>
+      <div class="typeline" id="typeline"><span id="typetext"></span><span class="caret">|</span><span class="who" id="typewho"></span></div>
+      <div class="hero-cta">
+        <a class="btn" href="#w-cemetery">Начать чтение</a>
+        <a class="btn ghost" href="#quiz">Пройти викторины</a>
+        <button class="btn ghost" id="musicStart" type="button">♪ Включить фоновую музыку</button>
+      </div>
+      <div class="scrollhint"><b></b><span>Листайте вниз</span></div>
+    </div>
+    <div>
+      <div class="triptych" id="triptych"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= АВТОР ================= -->
+<section class="blk" id="author" data-ambkey="author">
+  <div class="inner">
+    <div class="sechead reveal">
+      <span class="rn">А</span>
+      <div>
+        <p class="kicker">Раздел первый · Биография</p>
+        <h2 class="h-sec">Человек, который<br>придумал русскую тишину</h2>
+      </div>
+    </div>
+
+    <div class="author-grid">
+      <div class="reveal">
+        <figure class="portrait">
+          <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Bryullov_portrait_of_Zhukovsky.jpg" alt="Портрет В. А. Жуковского работы Карла Брюллова" onerror="this.style.display='none'">
+          <figcaption>К. П. Брюллов. Портрет В. А. Жуковского, 1837—1838. Государственный Русский музей</figcaption>
+        </figure>
+        <div class="facts">
+          <div class="fact"><b>1783</b><span>год рождения, село Мишенское</span></div>
+          <div class="fact"><b>≈40</b><span>баллад — новый жанр в России</span></div>
+          <div class="fact"><b>1802</b><span>«Сельское кладбище» — дебют</span></div>
+          <div class="fact"><b>24</b><span>года при императорском дворе</span></div>
+          <div class="fact"><b>1849</b><span>перевод «Одиссеи» Гомера</span></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="bio">
+          <p class="dropcap">Василий Жуковский родился <b>29 января (9 февраля) 1783 года</b> в селе Мишенском Белевского уезда Тульской губернии — незаконный сын помещика Афанасия Бунина и пленной турчанки Сальхи. Фамилию и дворянство он получил от крёстного отца, бедного дворянина Андрея Жуковского, — и всю жизнь носил это «чужое» имя как своё.</p>
+          <p>Учился в Тульском народном училище, затем в Московском университетском Благородном пансионе (1797—1801). Там сложился круг друзей — Андрей и Николай Тургеневы, Алексей Мерзляков, — память о котором пройдёт через всю лирику поэта. Именно пансионские годы подарили русской литературе «Сельское кладбище» и «Вечер».</p>
+          <p>Жуковский — один из основоположников <b>русского романтизма</b>: автор элегий, посланий, романсов и баллад («Людмила», «Светлана», «Лесной царь»), переводчик Шиллера, Гёте, Байрона, Гомера, а также наставник цесаревича Александра Николаевича, будущего императора Александра II. В 1833 году написал слова гимна «Боже, Царя храни!».</p>
+          <p>Он был ходатаем и заступником: смягчал участь ссыльных, помогал Шевченко (выкупил из крепостной зависимости), поддерживал Пушкина и был рядом с ним в январе 1837 года. В 1841 году вышел в отставку, женился на Елизавете Рейтерн и поселился в Германии.</p>
+          <p>Умер <b>12 (24) апреля 1852 года</b> в Баден-Бадене; похоронен в Петербурге на Тихвинском кладбище Александро-Невской лавры.</p>
+        </div>
+
+        <blockquote class="quotebig">«Невыразимое под пером мертвеет… Но что не выразишь словами, то выражает взгляд: в нём душа говорит душе.»<cite>В. А. Жуковский, «Невыразимое», 1819</cite></blockquote>
+
+        <div class="orn" style="margin:34px 0 8px"><span>❦</span></div>
+        <p class="h-sub" style="margin-bottom:6px">Хронология — нажмите на строку</p>
+        <div class="tl" id="tl"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ПРОИЗВЕДЕНИЯ (генерируются) ================= -->
+<div id="works"></div>
+
+<!-- ================= СРАВНЕНИЕ ================= -->
+<section class="blk" id="compare" data-ambkey="evening">
+  <div class="inner">
+    <div class="sechead reveal">
+      <span class="rn">≈</span>
+      <div>
+        <p class="kicker">Раздел пятый · Сопоставление</p>
+        <h2 class="h-sec">Три элегии рядом</h2>
+        <p class="lede" style="max-width:62ch;margin-top:14px">Одна и та же мысль — о скоротечности жизни и о вечности — в трёх разных пейзажах: сумеречном, закатном и морском.</p>
+      </div>
+    </div>
+    <div class="scroll-x reveal">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Сельское кладбище</th>
+            <th>Вечер</th>
+            <th>Море</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Год</th><td>1802 (май—сентябрь)</td><td>1806</td><td>1822</td></tr>
+          <tr><th>Жанр</th><td>Элегия, вольный перевод Т. Грея</td><td>Элегия с чертами идиллии</td><td>Философская элегия</td></tr>
+          <tr><th>Первая публикация</th><td>«Вестник Европы», 1802, № 24</td><td>«Вестник Европы», 1806, № 10</td><td>Альманах «Полярная звезда» на 1823 год</td></tr>
+          <tr><th>Стихотворный размер</th><td>Шестистопный ямб, перекрёстная рифмовка</td><td>Разностопный ямб (6-стопный + 4-стопный)</td><td>Четырёхстопный амфибрахий, белый стих</td></tr>
+          <tr><th>Главный образ</th><td>Кладбище в сумерках, могила селянина</td><td>Ручей, закат, ущербная луна</td><td>Живое море и светлое небо</td></tr>
+          <tr><th>Основная тема</th><td>Смерть, равная для всех; память и забвение</td><td>Юность, дружба, быстротечность времени</td><td>Тайна бытия, стремление души к идеалу</td></tr>
+          <tr><th>Роль природы</th><td>Обрамление для размышления о человеке</td><td>Соучастница чувств героя, зеркало души</td><td>Одушевлённый собеседник, символ души</td></tr>
+          <tr><th>Настроение</th><td>Скорбное, просветлённое</td><td>Ностальгическое, тёплое</td><td>Торжественное и тревожное</td></tr>
+          <tr><th>Финал</th><td>Эпитафия «певцу уединенному»</td><td>Друзья придут мечтать «над тихой юноши могилой»</td><td>«Ты, небом любуясь, дрожишь за него»</td></tr>
+          <tr><th>Что общего</th><td colspan="3" style="color:#e7ddc9">Все три — элегии о времени: вечер дня становится вечером жизни. Везде природа одушевлена, везде лирический герой говорит вполголоса, и везде в финале возникает мысль о смерти — не пугающая, а просветлённая.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= СЛОВАРЬ ================= -->
+<section class="blk" id="gloss" data-ambkey="author">
+  <div class="inner">
+    <div class="sechead reveal">
+      <span class="rn">Ѣ</span>
+      <div>
+        <p class="kicker">Раздел шестой · Язык эпохи</p>
+        <h2 class="h-sec">Словарь устаревших<br>и поэтических слов</h2>
+        <p class="lede" style="max-width:64ch;margin-top:14px">Жуковский писал «высоким» языком: славянизмы и мифологические образы создают ту самую медлительную элегическую интонацию. Наведите на карточку или нажмите — увидите, где встречается слово.</p>
+      </div>
+    </div>
+
+    <div class="glossbar reveal">
+      <input id="glossSearch" type="search" placeholder="Поиск слова… например, «денница»" aria-label="Поиск по словарю">
+      <div class="gfilters" id="gfilters">
+        <button class="mini act" data-f="all">Все</button>
+        <button class="mini" data-f="cemetery">Сельское кладбище</button>
+        <button class="mini" data-f="evening">Вечер</button>
+        <button class="mini" data-f="sea">Море</button>
+      </div>
+      <span id="gcount" class="gcount"></span>
+    </div>
+
+    <div class="glossgrid reveal" id="glossgrid"></div>
+    <p id="gempty" style="display:none;color:var(--muted);margin-top:26px;font-style:italic">Ничего не найдено. Попробуйте другой запрос или выберите другое произведение.</p>
+  </div>
+</section>
+
+<!-- ================= ВИКТОРИНЫ ================= -->
+<section class="blk" id="quiz" data-ambkey="quiz">
+  <div class="inner">
+    <div class="sechead reveal">
+      <span class="rn">?</span>
+      <div>
+        <p class="kicker">Раздел седьмой · Проверь себя</p>
+        <h2 class="h-sec">Три викторины</h2>
+        <p class="lede" style="max-width:62ch;margin-top:14px">Отдельная викторина по каждому произведению: семь вопросов, мгновенная проверка и пояснение к каждому ответу.</p>
+      </div>
+    </div>
+    <div class="qcards reveal" id="qcards"></div>
+    <div id="quizArea"></div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="fgrid">
+    <div>
+      <h4>Разделы</h4>
+      <ul>
+        <li><a href="#author">Василий Жуковский: биография</a></li>
+        <li><a href="#w-cemetery">«Сельское кладбище»</a></li>
+        <li><a href="#w-evening">«Вечер»</a></li>
+        <li><a href="#w-sea">«Море»</a></li>
+        <li><a href="#compare">Сравнительная таблица</a></li>
+        <li><a href="#gloss">Словарь устаревших слов</a></li>
+        <li><a href="#quiz">Викторины по произведениям</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Авторы проекта</h4>
+      <ul class="authors">
+        <li>Лыжак Тимур</li>
+        <li>Кузнецов Матвей</li>
+        <li>Акинчиц Валерия</li>
+        <li>Прибышеня Вероника</li>
+        <li>Криштопенко Екатерина</li>
+        <li>Краснобаев Никита</li>
+        <li>Шевцов Кирилл</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>Образовательный проект · Русская литература</span>
+    <span>В. А. Жуковский · «Сельское кладбище» · «Вечер» · «Море»</span>
+  </div>
+</footer>
+
+<div class="dock">
+  <button class="dockbtn" id="soundBtn" title="Фоновая музыка: прибой и эмбиент" aria-label="Фоновая музыка">
+    <span class="soundwave"><i></i><i></i><i></i></span>
+  </button>
+  <button class="dockbtn" id="toTop" title="Наверх" aria-label="Наверх">↑</button>
+</div>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+  <button class="x" id="lbx" aria-label="Закрыть">✕</button>
+  <button class="nav prev" id="lbp" aria-label="Предыдущее">‹</button>
+  <button class="nav next" id="lbn" aria-label="Следующее">›</button>
+  <div style="text-align:center">
+    <img id="lbimg" src="" alt="">
+    <div class="cap" id="lbcap"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   ДАННЫЕ
+   ========================================================= */
+
+const POEM_CEMETERY = [
+"Уже бледнеет день, скрываясь за горою;\nШумящие стада толпятся над рекой;\nУсталый селянин медлительной стопою\nИдет, задумавшись, в шалаш спокойный свой.",
+"В туманном сумраке окрестность исчезает…\nПовсюду тишина; повсюду мертвый сон;\nЛишь изредка, жужжа, вечерний жук мелькает,\nЛишь слышится вдали рогов унылый звон.",
+"Лишь дикая сова, таясь под древним сводом\nТой башни, сетует, внимаема луной,\nНа возмутившего полуночным приходом\nЕе безмолвного владычества покой.",
+"Под кровом черных сосн и вязов наклоненных,\nКоторые окрест, развесившись, стоят,\nЗдесь праотцы села, в гробах уединенных\nНавеки затворясь, сном непробудным спят.",
+"Денницы тихий глас, дня юного дыханье,\nНи крики петуха, ни звучный гул рогов,\nНи ранней ласточки на кровле щебетанье —\nНичто не вызовет почивших из гробов.",
+"На дымном очаге трескучий огнь, сверкая,\nИх в зимни вечера не будет веселить,\nИ дети резвые, встречать их выбегая,\nНе будут с жадностью лобзаний их ловить.",
+"Как часто их серпы златую ниву жали\nИ плуг их побеждал упорные поля!\nКак часто их секир дубравы трепетали\nИ по́том их лица кропилася земля!",
+"Пускай рабы сует их жребий унижают,\nСмеяся в слепоте полезным их трудам,\nПускай с холодностью презрения внимают\nТаящимся во тьме убогого делам;",
+"На всех ярится смерть — царя, любимца славы,\nВсех ищет грозная… и некогда найдет;\nВсемощныя судьбы незыблемы уставы:\nИ путь величия ко гробу нас ведет!",
+"А вы, наперсники фортуны ослепленны,\nНапрасно спящих здесь спешите презирать\nЗа то, что гро́бы их непышны и забвенны,\nЧто лесть им алтарей не мыслит воздвигать.",
+"Вотще над мертвыми, истлевшими костями\nТрофеи зиждутся, надгробия блестят,\nВотще глас почестей гремит перед гробами —\nУгасший пепел наш они не воспалят.",
+"Ужель смягчится смерть сплетаемой хвалою\nИ невозвратную добычу возвратит?\nНе слаще мертвых сон под мраморной доскою;\nНадменный мавзолей лишь персть их бременит.",
+"Ах! может быть, под сей могилою таится\nПрах сердца нежного, умевшего любить,\nИ гробожитель-червь в сухой главе гнездится,\nРожденной быть в венце иль мыслями парить!",
+"Но просвещенья храм, воздвигнутый веками,\nУгрюмою судьбой для них был затворен,\nИх рок обременил убожества цепями,\nИх гений строгою нуждою умерщвлен.",
+"Как часто редкий перл, волнами сокровенной,\nВ бездонной пропасти сияет красотой;\nКак часто лилия цветет уединенно,\nВ пустынном воздухе теряя запах свой.",
+"Быть может, пылью сей покрыт Гампден надменный,\nЗащитник сограждан, тиранства смелый враг;\nИль кровию граждан Кромвель необагренный,\nИли Мильтон немой, без славы скрытый в прах.",
+"Отечество хранить державною рукою,\nСражаться с бурей бед, фортуну презирать,\nДары обилия на смертных лить рекою,\nВ слезах признательных дела свои читать —",
+"Того им не дал рок; но вместе преступленьям\nОн с доблестями их круг тесный положил;\nБежать стезей убийств ко славе, наслажденьям\nИ быть жестокими к страдальцам запретил;",
+"Таить в душе своей глас совести и чести,\nРумянец робкия стыдливости терять\nИ, раболепствуя, на жертвенниках лести\nДары небесных Муз гордыне посвящать.",
+"Скрываясь от мирских погибельных смятений,\nБез страха и надежд, в долине жизни сей,\nНе зная горести, не зная наслаждений,\nОни беспечно шли тропинкою своей.",
+"И здесь спокойно спят под сенью гробовою —\nИ скромный памятник, в приюте сосн густых,\nС непышной надписью и резьбою простою,\nПрохожего зовет вздохнуть над прахом их.",
+"Любовь на камне сем их память сохранила,\nИх ле́та, имена потщившись начертать;\nОкрест библейскую мораль изобразила,\nПо коей мы должны учиться умирать.",
+"И кто с сей жизнию без горя расставался?\nКто прах свой по себе забвенью предавал?\nКто в час последний свой сим миром не пленялся\nИ взора томного назад не обращал?",
+"Ах! нежная душа, природу покидая,\nНадеется друзьям оставить пламень свой;\nИ взоры тусклые, навеки угасая,\nЕще стремятся к ним с последнею слезой;",
+"Их сердце милый глас в могиле нашей слышит;\nНаш камень гробовой для них одушевлен;\nДля них наш мертвый прах в холодной урне дышит,\nЕще огнем любви для них воспламенен.",
+"А ты, почивших друг, певец уединенный,\nИ твой ударит час, последний, роковой;\nИ к гробу твоему, мечтой сопровожденный,\nЧувствительный придет услышать жребий твой.",
+"Быть может, селянин с почтенной сединою\nТак будет о тебе пришельцу говорить:\n«Он часто по утрам встречался здесь со мною,\nКогда спешил на холм зарю предупредить.",
+"Там в полдень он сидел под дремлющею ивой,\nПоднявшей из земли косматый корень свой;\nТам часто, в горести беспечной, молчаливой,\nЛежал, задумавшись, над светлою рекой;",
+"Нередко ввечеру, скитаясь меж кустами, —\nКогда мы с поля шли и в роще соловей\nСвистал вечерню песнь, — он томными очами\nУныло следовал за тихою зарей.",
+"Прискорбный, сумрачный, с главою наклоненной,\nОн часто уходил в дубраву слезы лить,\nКак странник, родины, друзей, всего лишенной,\nКоторому ничем души не усладить.",
+"Взошла заря — но он с зарею не являлся,\nНи к иве, ни на холм, ни в лес не приходил;\nОпять заря взошла — нигде он не встречался;\nМой взор его искал — искал — не находил.",
+"Наутро пение мы слышим гробовое…\nНесчастного несут в могилу положить.\nПриблизься, прочитай надгробие простое,\nЧтоб память доброго слезой благословить».",
+"Здесь пепел юноши безвременно сокрыли;\nЧто слава, счастие, не знал он в мире сем.\nНо музы от него лица не отвратили,\nИ меланхолии печать была на нем.",
+"Он кроток сердцем был, чувствителен душою —\nЧувствительным Творец награду положил.\nДарил несчастных он — чем только мог — слезою;\nВ награду от Творца он друга получил.",
+"Прохожий, помолись над этою могилой;\nОн в ней нашел приют от всех земных тревог;\nЗдесь все оставил он, что в нем греховно было,\nС надеждою, что жив его Спаситель-Бог."
+];
+
+const POEM_EVENING = [
+"Ручей, виющийся по светлому песку,\nКак тихая твоя гармония приятна!\nС каким сверканием кати́шься ты в реку!\nПриди, о муза благодатна,",
+"В венке из юных роз, с цевницею златой;\nСклонись задумчиво на пенистые воды\nИ, звуки оживив, туманный вечер пой\nНа лоне дремлющей природы.",
+"Как солнца за горой пленителен закат, —\nКогда поля в тени, а рощи отдаленны\nИ в зеркале воды колеблющийся град\nБагряным блеском озаренны;",
+"Когда с холмов златых стада бегут к реке\nИ рева гул гремит звучнее над водами;\nИ, сети склав, рыбак на легком челноке\nПлывет у брега меж кустами;",
+"Когда пловцы шумят, скликаясь по стругам,\nИ веслами струи согласно рассекают;\nИ, плуги обратив, по глыбистым браздам\nС полей оратаи съезжают…",
+"Уж вечер… облаков померкнули края,\nПоследний луч зари на башнях умирает;\nПоследняя в реке блестящая струя\nС потухшим небом угасает.",
+"Все тихо: рощи спят; в окрестности покой;\nПростершись на траве под ивой наклоненной,\nВнимаю, как журчит, сливаяся с рекой,\nПоток, кустами осененный.",
+"Как слит с прохладою растений фимиам!\nКак сладко в тишине у брега струй плесканье!\nКак тихо веянье зефира по водам\nИ гибкой ивы трепетанье!",
+"Чуть слышно над ручьем колышется тростник;\nГлас петела вдали уснувши будит селы;\nВ траве коростеля я слышу дикий крик,\nВ лесу стенанье филомелы…",
+"Но что?.. Какой вдали мелькнул волшебный луч?\nВосточных облаков хребты воспламенились;\nОсыпан искрами во тьме журчащий ключ;\nВ реке дубравы отразились.",
+"Луны ущербный лик встает из-за холмов…\nО тихое небес задумчивых светило,\nКак зыблется твой блеск на сумраке лесов!\nКак бледно брег ты озлатило!",
+"Сижу задумавшись; в душе моей мечты;\nК протекшим временам лечу воспоминаньем…\nО дней моих весна, как быстро скрылась ты\nС твоим блаженством и страданьем!",
+"Где вы, мои друзья, вы, спутники мои?\nУжели никогда не зреть соединенья?\nУжель иссякнули всех радостей струи?\nО вы, погибши наслажденья!",
+"О братья! о друзья! где наш священный круг?\nГде песни пламенны и музам и свободе?\nГде Вакховы пиры при шуме зимних вьюг?\nГде клятвы, данные природе,",
+"Хранить с огнем души нетленность братских уз?\nИ где же вы, друзья?.. Иль всяк своей тропою,\nЛишенный спутников, влача сомнений груз,\nРазочарованный душою,",
+"Тащиться осужден до бездны гробовой?..\nОдин — минутный цвет — почил, и непробудно,\nИ гроб безвременный любовь кропит слезой…\nДругой… о небо правосудно!..",
+"А мы… ужель дерзнем друг другу чужды быть?\nУжель красавиц взор, иль почестей исканье,\nИль суетная честь приятным в свете слыть\nЗагладят в сердце вспоминанье",
+"О радостях души, о счастье юных дней,\nИ дружбе, и любви, и музам посвященных?\nНет, нет! пусть всяк идет вослед судьбе своей,\nНо в сердце любит незабвенных…",
+"Мне рок судил: брести неведомой стезей,\nБыть другом мирных сел, любить красы природы,\nДышать под сумраком дубравной тишиной\nИ, взор склонив на пенны воды,",
+"Творца, друзей, любовь и счастье воспевать.\nО песни, чистый плод невинности сердечной!\nБлажен, кому дано цевницей оживлять\nЧасы сей жизни скоротечной!",
+"Кто, в тихий утра час, когда туманный дым\nЛожится по полям и хо́лмы облачает\nИ солнце, восходя, по рощам голубым\nСпокойно блеск свой разливает,",
+"Спешит, восторженный, оставя сельский кров,\nВ дубраве упредить пернатых пробужденье\nИ, лиру соглася с свирелью пастухов,\nПоет светила возрожденье!",
+"Так, петь есть мой удел… но долго ль?.. Как узнать?..\nАх! скоро, может быть, с Минваною унылой\nПридет сюда Альпин в час вечера мечтать\nНад тихой юноши могилой!"
+];
+
+const POEM_SEA = [
+"Безмолвное море, лазурное море,\nСтою очарован над бездной твоей.\nТы живо; ты дышишь; смятенной любовью,\nТревожною думой наполнено ты.",
+"Безмолвное море, лазурное море,\nОткрой мне глубокую тайну твою.\nЧто движет твое необъятное лоно?\nЧем дышит твоя напряженная грудь?",
+"Иль тянет тебя из земныя неволи\nДалекое, светлое небо к себе?..\nТаинственной, сладостной полное жизни,\nТы чисто в присутствии чистом его:",
+"Ты льешься его светозарной лазурью,\nВечерним и утренним светом горишь,\nЛаскаешь его облака золотые\nИ радостно блещешь звездами его.",
+"Когда же сбираются темные тучи,\nЧтоб ясное небо отнять у тебя —\nТы бьешься, ты воешь, ты волны подъемлешь,\nТы рвешь и терзаешь враждебную мглу…",
+"И мгла исчезает, и тучи уходят,\nНо, полное прошлой тревоги своей,\nТы долго вздымаешь испуганны волны,\nИ сладостный блеск возвращенных небес",
+"Не вовсе тебе тишину возвращает;\nОбманчив твоей неподвижности вид:\nТы в бездне покойной скрываешь смятенье,\nТы, небом любуясь, дрожишь за него."
+];
+
+const WORKS = [
+{
+  id:'cemetery', num:'I', amb:'cemetery', title:'Сельское кладбище', year:'1802',
+  genre:'Элегия', size:'Шестистопный ямб', first:'«Вестник Европы», 1802, № 24',
+  epi:'«Уже бледнеет день, скрываясь за горою…» — первое произведение, которое Жуковский признал началом своего пути.',
+  img:'https://images.pexels.com/photos/34021547/pexels-photo-34021547.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+  peek:'Здесь праотцы села, в гробах уединенных навеки затворясь, сном непробудным спят…',
+  poem:POEM_CEMETERY,
+  ptitle:'Сельское кладбище',
+  psub:'Элегия · Вольный перевод из Томаса Грея · 1802',
+  pnote:'36 строф · 144 строки · шестистопный ямб, перекрёстная рифмовка (абаб). Текст приводится по первой редакции 1802 года.',
+  history:[
+    {h:'Первый подход: 1801 год', p:'В конце 1801 года двадцатилетний Жуковский, воспитанник Московского университетского Благородного пансиона, перевёл знаменитую элегию английского поэта <b>Томаса Грея «Elegy Written in a Country Churchyard»</b> (1751). Рукопись он показал Н. М. Карамзину — и тот сделал юному переводчику строгие замечания: стих выходил тяжеловесным, «школьным». Жуковский отложил работу.'},
+    {h:'Мишенское, лето 1802 года', p:'Летом 1802 года в родовом имении <b>Мишенском</b> Тульской губернии он переписал элегию заново — май и сентябрь стали временем окончательной редакции. Поэт нашёл интонацию, которой в русской поэзии ещё не было: медлительный шестистопный ямб, сумеречная лексика, разговор не с читателем, а с самим собой вполголоса.'},
+    {h:'Публикация и посвящение', p:'Стихотворение вышло в журнале <b>«Вестник Европы»</b> (1802, часть 6, № 24, с. 319—325) под заглавием «Сельское кладбище, Греева элегия, переведенная с английского» и с посвящением <b>«А. И. Т—у»</b> — Андрею Ивановичу Тургеневу, ближайшему другу пансионских лет.'},
+    {h:'Почему это важно', p:'Сам Жуковский считал «Сельское кладбище» началом своей литературной биографии. Из перевода Грея родилось не переложение, а <b>самостоятельное русское произведение</b>: английское кладбище стало русским, а сентиментализм перешёл в романтизм. Спустя 37 лет, в 1839 году, поэт сделал второй перевод той же элегии — уже гекзаметром («Колокол поздний кончину отшедшего дня возвещает…»).'},
+    {h:'След в литературе', p:'Мотив «кладбищенской» медитации и равенства всех перед смертью отзовётся у Пушкина («Брожу ли я вдоль улиц шумных…»), у Баратынского, Тютчева и Некрасова. А строки о «немом Мильтоне» и «необагренном Кромвеле» станут хрестоматийным примером романтической антитезы величия и безвестности.'}
+  ],
+  asideTitle:'Паспорт произведения',
+  aside:[
+    ['✦','Написано: май — сентябрь 1802 г., село Мишенское'],
+    ['✦','Опубликовано: «Вестник Европы», 1802, № 24'],
+    ['✦','Источник: элегия Томаса Грея (1751)'],
+    ['✦','Посвящение: А. И. Тургеневу'],
+    ['✦','Объём: 36 строф, 144 строки'],
+    ['✦','Вторая редакция: 1839 год, гекзаметр']
+  ],
+  analysis:{
+    idea:'<p>Элегия открывается обычным сельским пейзажем в час заката: стада идут к реке, усталый селянин возвращается в шалаш, окрестность «в туманном сумраке исчезает». Но за этим вечерним угасанием проступает главный вопрос — о смерти, памяти и цене человеческой жизни.</p><p>Жуковский сопоставляет два мира: «наперсников фортуны» с их трофеями, мавзолеями и «гласом почестей» — и «праотцев села», чьи гробы «непышны и забвенны». Спор решается просто и страшно: <b>«На всех ярится смерть… И путь величия ко гробу нас ведет!»</b> Пышное надгробие не воскрешает: «Угасший пепел наш они не воспалят».</p><p>Но главная мысль не в равенстве перед смертью, а в <b>неравенстве перед жизнью</b>. Под скромными могилами, может быть, покоятся «Гампден надменный», «Кромвель необагренный», «Мильтон немой» — люди, рождённые для великих дел, но не допущенные к просвещению: «Их гений строгою нуждою умерщвлен». Бедность, а не бездарность лишила их славы.</p><p>Финал переводит разговор на самого поэта: «А ты, почивших друг, певец уединенный, / И твой ударит час…» Эпитафия юноше, который «дарил несчастных… слезою», — это автопортрет Жуковского и его исповедание веры: ценность человека измеряется не славой, а способностью чувствовать и сострадать.</p>',
+    themes:['Жизнь и смерть','Равенство всех перед вечностью','Память и забвение','Нереализованный талант','Труд и простая добродетель','Сострадание','Поэт и его судьба'],
+    comp:[
+      ['I','Пейзажное вступление (строфы 1—7). Вечер, тишина, сова, сосны — движение от заката к ночи как образ угасания жизни.'],
+      ['II','Медитация (строфы 8—25). Обращение к «рабам сует» и «наперсникам фортуны»: смерть уравнивает всех; под скромными могилами могли быть великие люди; воспоминание живых сопровождает умерших.'],
+      ['III','Эпитафия (строфы 26—36). Взгляд обращается на самого певца: селянин расскажет пришельцу о юноше, который приходил сюда мечтать, — и последняя просьба: «Прохожий, помолись над этою могилой».']
+    ],
+    dev:[
+      ['Олицетворение','Природа и смерть действуют как живые существа — главный приём элегии.','«Уже бледнеет день, скрываясь за горою»; «На всех ярится смерть»; «Как часто их секир дубравы трепетали».'],
+      ['Эпитеты','Устойчивые «сумеречные» определения задают элегический тон.','«мертвый сон», «безмолвное владычество», «сон непробудный», «гроб безвременный», «певец уединенный».'],
+      ['Антитеза','Противопоставление пышности и простоты, славы и забвения.','«Надменный мавзолей лишь персть их бременит» — против «скромный памятник, в приюте сосн густых».'],
+      ['Сравнение','Скрытые достоинства бедняков сравниваются с редкими дарами природы.','«Как часто редкий перл, волнами сокровенной, / В бездонной пропасти сияет красотой…»'],
+      ['Метафора','Отвлечённые понятия обретают предметную форму.','«просвещенья храм, воздвигнутый веками», «убожества цепи», «гробожитель-червь».'],
+      ['Архаизмы и славянизмы','Торжественная, «библейская» лексика возвышает речь.','«денница», «персть», «вотще», «небагренный», «зиждутся», «праотцы».'],
+      ['Риторические вопросы и восклицания','Имитируют живое размышление вслух.','«И кто с сей жизнию без горя расставался?»; «Ах! может быть, под сей могилою таится…»'],
+      ['Инверсия','Обратный порядок слов замедляет чтение, создаёт медлительность элегии.','«Здесь праотцы села, в гробах уединенных / Навеки затворясь, сном непробудным спят».'],
+      ['Кольцевая композиция','Стихотворение начинается вечером на кладбище и заканчивается могилой самого певца.','Закат → ночь → надгробие → «Прохожий, помолись над этою могилой».']
+    ],
+    ask:['Почему Жуковский выбрал для размышления именно кладбище, а не дворец или поле битвы?','Какие детали пейзажа в первых трёх строфах работают на главную мысль?','Зачем поэту понадобились имена Гампдена, Кромвеля и Мильтона — английские, а не русские?','Как меняется интонация от строфы 26 («А ты, почивших друг…») к финалу?','Согласны ли вы с тем, что «эпитафия» — это автопортрет поэта? Аргументируйте.']
+  },
+  collage:[
+    {src:'https://images.pexels.com/photos/34021547/pexels-photo-34021547.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Сельская церковь в утреннем тумане', cls:'t-a', r:'-1.2deg'},
+    {src:'https://images.pexels.com/photos/28111465/pexels-photo-28111465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Старое кладбище и осенние деревья', cls:'t-b', r:'1.4deg'},
+    {q:'«Под кровом черных сосн и вязов наклоненных… Здесь праотцы села, в гробах уединенных навеки затворясь, сном непробудным спят».', cls:'t-c', r:'-.6deg'},
+    {src:'https://images.pexels.com/photos/34021548/pexels-photo-34021548.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Туман над историческим погостом', cls:'t-d', r:'1.8deg'},
+    {src:'https://images.pexels.com/photos/34537225/pexels-photo-34537225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Колокольня старой церкви в осенней листве', cls:'t-e', r:'-1.6deg'},
+    {src:'https://images.pexels.com/photos/36012873/pexels-photo-36012873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Утро на кладбище: архитектура и деревья в дымке', cls:'t-f', r:'.9deg'}
+  ],
+  music:[
+    {a:'Баста', t:'Сансара', y:'2016', why:'«Когда меня не станет, я буду петь голосами моих детей» — прямое созвучие мысли элегии о том, что память живёт в тех, кто остаётся.', tags:['память','прощание']},
+    {a:'Сплин', t:'Романс', y:'2001', why:'Тихая минорная исповедь в сумеречном темпе: та же интонация «вполголоса», что и у Жуковского.', tags:['элегия','тишина']},
+    {a:'Polnalyubvi', t:'Кометы', y:'2019', why:'Хрупкость жизни и свет в темноте — современный аналог «редкого перла, волнами сокровенной».', tags:['хрупкость','свет']},
+    {a:'Uma2rman', t:'Проститься', y:'2004', why:'Песня о прощании без надрыва: светлая печаль, как в финальной эпитафии.', tags:['прощание']},
+    {a:'Кино', t:'Кукушка', y:'1990', why:'Вопрос «сколько лет, сколько зим» — прямой диалог с темой жизни и смерти; классика, понятная и сегодня.', tags:['классика','смерть']},
+    {a:'Аигел', t:'Пыяла', y:'2023', why:'Память о корнях, родном языке и ушедших — элегия о том, что остаётся после человека.', tags:['память','корни']}
+  ],
+  bonus:'Глинка — «Ноктюрн „Разлука“»; Свиридов — «Романс» из музыкальных иллюстраций к «Метели». Обе пьесы звучат как инструментальный аналог сумеречной элегии.'
+},
+{
+  id:'evening', num:'II', amb:'evening', title:'Вечер', year:'1806',
+  genre:'Элегия', size:'Разностопный ямб', first:'«Вестник Европы», 1806, № 10',
+  epi:'«Ручей, виющийся по светлому песку…» — двадцатитрёхлетний поэт находит свою главную интонацию: пейзаж становится исповедью.',
+  img:'https://images.pexels.com/photos/29794998/pexels-photo-29794998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+  peek:'О дней моих весна, как быстро скрылась ты с твоим блаженством и страданьем!..',
+  poem:POEM_EVENING,
+  ptitle:'Вечер',
+  psub:'Элегия · 1806',
+  pnote:'23 строфы · разностопный ямб (шестистопные строки чередуются с четырёхстопной), перекрёстная рифмовка. Первая «настоящая» элегия Жуковского.',
+  history:[
+    {h:'1806 год: после пансиона', p:'«Вечер» написан в 1806 году, когда Жуковский уже четыре года как был известен — но ещё не нашёл своего главного тона. К этому моменту позади остались Тульское училище и Московский Благородный пансион, служба в Соляной конторе, первые переводы и первые неудачи.'},
+    {h:'Круг друзей', p:'Стихотворение связано с воспоминаниями о дружеском кружке пансионских лет: <b>Андрей и Николай Тургеневы, Алексей Мерзляков, Семён Родзянко</b>. Именно им адресованы строки «О братья! о друзья! где наш священный круг?» Позднее этот круг преобразится в «Дружеское литературное общество» (1801) и в знаменитый «Арзамас».'},
+    {h:'Утрата', p:'В строфах о друзьях звучит не только ностальгия: «Один — минутный цвет — почил, и непробудно, / И гроб безвременный любовь кропит слезой…». Исследователи связывают эти строки с ранней смертью <b>Андрея Тургенева</b> (1781—1803) — того самого, кому посвящено «Сельское кладбище». Элегия становится памятником дружбе, которой уже не вернуть.'},
+    {h:'Публикация', p:'Стихотворение напечатано в <b>«Вестнике Европы»</b> (1806, № 10) — журнале, который Жуковский вскоре сам возглавит. «Вечер» был принят как образец новой русской поэзии: пейзаж в нём перестал быть декорацией и сделался языком души.'},
+    {h:'Что изменилось после «Вечера»', p:'Именно здесь Жуковский формулирует своё кредо: «Так, петь есть мой удел…» Поэт выбирает путь не государственного человека и не сатирика, а «друга мирных сел», певца природы, дружбы и памяти. Через два года он напишет «Людмилу» — и станет основателем русской баллады.'}
+  ],
+  asideTitle:'Паспорт произведения',
+  aside:[
+    ['✦','Написано и опубликовано в 1806 году'],
+    ['✦','«Вестник Европы», 1806, № 10'],
+    ['✦','Связано с кругом друзей: А. и Н. Тургеневы, А. Мерзляков'],
+    ['✦','Объём: 23 строфы'],
+    ['✦','Жанр: элегия с чертами идиллии'],
+    ['✦','Ключевой образ: ручей, бегущий к реке']
+  ],
+  analysis:{
+    idea:'<p>«Вечер» устроен как музыкальное произведение: сначала — <b>пейзажная партитура</b> (ручей, закат, стада, рыбак, оратаи), затем — <b>восход луны</b>, потом — <b>переход внутрь</b>, в воспоминание, и наконец — <b>принятие своей судьбы</b>. Время суток и время жизни совпадают: вечер дня оказывается вечером юности.</p><p>Первая половина почти безмятежна. Поэт вызывает музу и просит её «туманный вечер петь на лоне дремлющей природы». Пейзаж намеренно «сельский», пастушеский: стада, челнок рыбака, плуги, свирель пастухов — это язык идиллии XVIII века, но оживлённый точными звуками и красками.</p><p>Перелом происходит в одиннадцатой строфе: «Луны ущербный лик встает из-за холмов… Сижу задумавшись; в душе моей мечты; / К протекшим временам лечу воспоминаньем…» С этого момента элегия говорит уже не о природе, а о дружбе, разлуке и смерти: «О дней моих весна, как быстро скрылась ты!»</p><p>Кульминация — вопрос, обращённый к друзьям: «Ужель красавиц взор, иль почестей исканье… загладят в сердце вспоминанье?» Ответ твёрд: «Нет, нет! пусть всяк идет вослед судьбе своей, / Но в сердце любит незабвенных…»</p><p>Финал возвращает нас к началу, но уже с мыслью о смерти: «Так, петь есть мой удел… но долго ль?..» Поэт воображает, как друзья придут мечтать «над тихой юноши могилой». Смерть не страшна — страшно забвение; а поэзия и дружба и есть то, что побеждает забвение.</p>',
+    themes:['Красота вечерней природы','Юность и её быстротечность','Дружба и разлука','Память об умершем друге','Призвание поэта','Время и вечность'],
+    comp:[
+      ['I','Обращение к музе и вечерний пейзаж (строфы 1—9): от заката солнца к полной тишине — ручей, стада, рыбак, оратаи, тростник, соловей.'],
+      ['II','Восход луны (строфы 10—11): «ущербный лик» светила становится сигналом перехода от внешнего к внутреннему.'],
+      ['III','Элегическая медитация (строфы 12—18): воспоминание о «днях весны», о друзьях, об утратах; риторические вопросы и клятва помнить.'],
+      ['IV','Принятие удела (строфы 19—22): «Мне рок судил… Творца, друзей, любовь и счастье воспевать»; блаженство певца.'],
+      ['V','Финал (строфа 23): взгляд в будущее — друзья придут мечтать над могилой «юноши»; элегия замыкается мыслью о смерти.']
+    ],
+    dev:[
+      ['Звукопись','Аллитерации на «с», «ш», «р» имитируют журчание ручья и шелест листвы.','«Чуть слышно над ручьем колышется тростник»; «Как сладко в тишине у брега струй плесканье».'],
+      ['Олицетворение','Природа «дремлет», рощи «спят», заря «умирает» — мир одушевлён.','«Последний луч зари на башнях умирает»; «рощи спят; в окрестности покой».'],
+      ['Мифологические образы','Язык классицистической идиллии: муза, зефир, Вакх, филомела.','«Приди, о муза благодатна, в венке из юных роз, с цевницею златой».'],
+      ['Славянизмы','Высокая лексика придаёт речи торжественность.','«цевница», «оратаи», «фимиам», «глас петела», «филомела», «струги», «бразды».'],
+      ['Эпитеты','Цветовые и световые определения создают «вечернюю» палитру.','«светлый песок», «златые холмы», «багряный блеск», «ущербный лик луны».'],
+      ['Риторические вопросы','Переход от описания к исповеди.','«Где вы, мои друзья, вы, спутники мои?»; «Ужель иссякнули всех радостей струи?»'],
+      ['Символ','Ручей, стремящийся к реке, — образ человеческой жизни, идущей к своему концу.','«С каким сверканием катишься ты в реку!»'],
+      ['Контраст света и тьмы','Вторая часть строится на переходе от угасающего заката к восходящей луне.','«Облаков померкнули края» → «Какой вдали мелькнул волшебный луч?»']
+    ],
+    ask:['Какие звуки наполняют пейзаж в первых девяти строфах и как они меняются?','Почему именно восход луны, а не закат солнца становится переломом элегии?','Кто такие «минутный цвет» и «другой» в строфах о друзьях?','Как связаны призвание поэта («петь есть мой удел») и мысль о смерти в финале?','Что означают условные имена Альпин и Минвана и зачем они поэту?']
+  },
+  collage:[
+    {src:'https://images.pexels.com/photos/29794998/pexels-photo-29794998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Золотой закат над сельским пейзажем', cls:'t-a', r:'1deg'},
+    {src:'https://images.pexels.com/photos/26221701/pexels-photo-26221701.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Поле на закате: «с холмов златых стада бегут к реке»', cls:'t-b', r:'-1.3deg'},
+    {q:'«Уж вечер… облаков померкнули края, последний луч зари на башнях умирает».', cls:'t-c', r:'.7deg'},
+    {src:'https://images.pexels.com/photos/13543272/pexels-photo-13543272.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Трава в лучах заходящего солнца', cls:'t-d', r:'-1.9deg'},
+    {src:'https://images.pexels.com/photos/32288166/pexels-photo-32288166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Поля у горизонта в тёплом вечернем свете', cls:'t-e', r:'1.5deg'},
+    {src:'https://images.pexels.com/photos/33972566/pexels-photo-33972566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Дорога и дерево в час заката', cls:'t-f', r:'-.8deg'}
+  ],
+  music:[
+    {a:'Zoloto', t:'Полюшка', y:'2019', why:'Мягкий вечерний свет и нежность без надрыва — точный музыкальный аналог «багряного блеска» на воде.', tags:['вечер','нежность']},
+    {a:'Земфира', t:'Прогулка', y:'2004', why:'Юность, дорога и закат; энергия воспоминания о «днях весны».', tags:['юность','дорога']},
+    {a:'Сироткин', t:'Выше домов', y:'2016', why:'Созерцательная тишина большого вечера — современная русская меланхолия в чистом виде.', tags:['тишина','созерцание']},
+    {a:'Кино', t:'Пачка сигарет', y:'1989', why:'Вечерняя дорога и задумчивость лирического героя; классика, которая до сих пор звучит как элегия.', tags:['классика','дорога']},
+    {a:'МакSим', t:'Знаешь ли ты', y:'2006', why:'Ностальгия по юности и дружбе — то самое «где вы, мои друзья, вы, спутники мои?».', tags:['ностальгия','дружба']},
+    {a:'Смысловые галлюцинации', t:'Вечно молодой', y:'2000', why:'Спор с временем: «О дней моих весна, как быстро скрылась ты!» — и ответ песней.', tags:['юность','время']}
+  ],
+  bonus:'Чайковский — «Июнь. Баркарола» из цикла «Времена года»; Рахманинов — «Вокализ». Вечерняя вода, плавный ритм, печаль без слов.'
+},
+{
+  id:'sea', num:'III', amb:'sea', title:'Море', year:'1822',
+  genre:'Философская элегия', size:'Четырёхстопный амфибрахий · белый стих', first:'«Полярная звезда» на 1823 год',
+  epi:'«Безмолвное море, лазурное море…» — 28 строк без единой рифмы, ставшие вершиной русского романтизма.',
+  img:'https://images.pexels.com/photos/15435072/pexels-photo-15435072.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+  peek:'Ты в бездне покойной скрываешь смятенье, ты, небом любуясь, дрожишь за него…',
+  poem:POEM_SEA,
+  ptitle:'Море',
+  psub:'Элегия · 1822',
+  pnote:'28 строк, 7 строф · четырёхстопный амфибрахий · белый стих (без рифмы). Отсутствие рифмы здесь — художественный приём: стих «дышит» свободно, как морская волна.',
+  history:[
+    {h:'1822 год: зрелый романтизм', p:'«Море» написано в <b>1822 году</b>, когда Жуковскому уже тридцать девять. Позади — «Людмила» и «Светлана», «Певец во стане русских воинов», слава первого русского романтика, участие в кружке «Арзамас» (где его звали «Светлана»), пять лет службы при дворе в качестве учителя русского языка великой княгини Александры Фёдоровны.'},
+    {h:'Стихотворение без рифмы', p:'Для русской поэзии 1820-х годов это был смелый шаг: Жуковский пишет элегию <b>белым стихом</b> — четырёхстопным амфибрахием, без рифм. Рифмованные строки звучали бы «слишком правильно», а морю нужна свободная, дыхательная интонация. Ритм волн заменяет рифму: трёхсложный размер с ударением на середине даёт эффект качания.'},
+    {h:'Публикация у декабристов', p:'Стихотворение было напечатано в альманахе <b>«Полярная звезда» на 1823 год</b>, который издавали К. Ф. Рылеев и А. А. Бестужев, — будущие декабристы. Так «Море» оказалось в одном из самых политически значимых изданий эпохи, хотя само говорит совсем о другом — о душе и небе.'},
+    {h:'Философский контекст', p:'За «Морем» стоит немецкая романтическая философия, хорошо знакомая Жуковскому: учение о двух мирах — земном и идеальном, о стремлении конечного к бесконечному. Море у Жуковского — не природа, а <b>душа</b>; небо — не атмосфера, а <b>идеал</b>. Отсюда жанр: философская элегия, где пейзаж — это мысль.'},
+    {h:'После «Моря»', p:'Тема живой стихии продолжится в «Невыразимом» (1819, раньше «Моря»), в поздних элегиях и в переводах Гомера. Влияние «Моря» заметно у Тютчева («Как океан объемлет шар земной»), у Фета, у символистов — Бальмонта и Блока. Для школьного анализа это, пожалуй, самый «разобранный» текст Жуковского.'}
+  ],
+  asideTitle:'Паспорт произведения',
+  aside:[
+    ['✦','Написано в 1822 году'],
+    ['✦','Опубликовано: «Полярная звезда» на 1823 год'],
+    ['✦','Объём: 28 строк, 7 строф'],
+    ['✦','Размер: четырёхстопный амфибрахий'],
+    ['✦','Рифма отсутствует — белый стих'],
+    ['✦','Жанр: философская элегия']
+  ],
+  analysis:{
+    idea:'<p>Стихотворение построено как <b>диалог-вопрошание</b>: человек стоит «над бездной» и спрашивает море о его тайне. Дважды звучит рефрен «Безмолвное море, лазурное море» — это заклинание, попытка разговорить стихию, которая по определению безмолвна.</p><p>Вопросы героя: «Что движет твое необъятное лоно? Чем дышит твоя напряженная грудь?» — и тут же предлагается ответ: море тянется к небу. <b>Небо</b> — центральный символ элегии: это идеал, вечная гармония, божественный мир, «светлое небо», к которому море стремится «из земныя неволи». В присутствии неба море чисто: «Ты чисто в присутствии чистом его».</p><p>Но гармония неустойчива. Появляются «темные тучи», которые хотят «ясное небо отнять», — и море вступает в бой: «Ты бьешься, ты воешь, ты волны подъемлешь, / Ты рвешь и терзаешь враждебную мглу…» Буря — это страсть, страдание, борьба души за свой идеал.</p><p>Финал — самая глубокая мысль Жуковского. Тучи уходят, небо возвращается, но покоя нет: «Обманчив твоей неподвижности вид: / Ты в бездне покойной скрываешь смятенье, / <b>Ты, небом любуясь, дрожишь за него</b>». Душа, однажды познавшая гармонию, уже не может быть безмятежной: любовь делает её уязвимой навсегда.</p><p>Весь текст — олицетворение: море «живо», оно «дышит», «любит», «трепещет». Поэтому «Море» читается не как пейзаж, а как <b>портрет человеческой души</b> — вот почему это философская, а не описательная элегия.</p>',
+    themes:['Тайна бытия','Душа и её стремление к идеалу','Море и небо как два мира','Любовь и тревога','Буря и покой','Невыразимость чувства'],
+    comp:[
+      ['I','Вопрос (строфы 1—2). Два обращения-заклинания «Безмолвное море, лазурное море»; герой стоит над бездной и просит открыть тайну.'],
+      ['II','Ответ-предположение (строфы 3—4). Море тянет к себе небо; состояние гармонии: лазурь, свет, облака, звёзды.'],
+      ['III','Буря (строфа 5). Тучи отнимают небо — море бьётся, воет, рвёт и терзает «враждебную мглу».'],
+      ['IV','После бури (строфы 6—7). Мгла исчезает, но покой обманчив: «Ты в бездне покойной скрываешь смятенье».']
+    ],
+    dev:[
+      ['Олицетворение','Основа всего текста: море — живое существо, которое дышит, любит, борется и дрожит.','«Ты живо; ты дышишь; смятенной любовью, / Тревожною думой наполнено ты».'],
+      ['Анафора и рефрен','Повтор в начале строф работает как заклинание и как прибой.','«Безмолвное море, лазурное море…» — дважды.'],
+      ['Градация','Нарастание глаголов передаёт усиление бури.','«Ты бьешься, ты воешь, ты волны подъемлешь, / Ты рвешь и терзаешь враждебную мглу…»'],
+      ['Антитеза','Безмолвие и вой, покой и смятение, небо и мгла.','«Обманчив твоей неподвижности вид: / Ты в бездне покойной скрываешь смятенье».'],
+      ['Символ','Море — душа, небо — идеал, буря — страдание, зыбь — память сердца.','«Иль тянет тебя из земныя неволи / Далекое, светлое небо к себе?..»'],
+      ['Риторические вопросы','Вопросы, на которые нельзя ответить словами, — сама форма элегии.','«Что движет твое необъятное лоно? Чем дышит твоя напряженная грудь?»'],
+      ['Эпитеты','«Светлое», «лазурное», «враждебная», «испуганны» — точная эмоциональная окраска.','«Далекое, светлое небо»; «враждебная мгла»; «испуганны волны».'],
+      ['Архаизмы и славянизмы','Высокая лексика поднимает пейзаж до философского размышления.','«земныя неволи», «лоно», «подъемлешь», «испуганны волны», «светозарный».'],
+      ['Белый стих','Отсутствие рифмы — приём: стих движется свободно, как дыхание стихии.','Все 28 строк не имеют рифмы; музыкальность держится на ритме амфибрахия.']
+    ],
+    ask:['Почему Жуковский обращается к морю дважды одними и теми же словами?','Что означает «земная неволя» моря и от чего оно стремится освободиться?','Как связаны буря и любовь в элегии?','Почему в финале покой назван «обманчивым»?','Как отсутствие рифмы влияет на звучание стихотворения? Прочитайте вслух — что меняется?']
+  },
+  collage:[
+    {src:'https://images.pexels.com/photos/15435072/pexels-photo-15435072.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Тёмные волны в лунном свете', cls:'t-a', r:'-.9deg'},
+    {src:'https://images.pexels.com/photos/28320730/pexels-photo-28320730.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Шторм: «ты бьешься, ты воешь, ты волны подъемлешь»', cls:'t-b', r:'1.2deg'},
+    {q:'«Безмолвное море, лазурное море, открой мне глубокую тайну твою».', cls:'t-c', r:'-.5deg'},
+    {src:'https://images.pexels.com/photos/15406028/pexels-photo-15406028.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Лунная дорожка на спокойной воде', cls:'t-d', r:'1.7deg'},
+    {src:'https://images.pexels.com/photos/9973280/pexels-photo-9973280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'Волна ночью крупным планом', cls:'t-e', r:'-1.4deg'},
+    {src:'https://images.pexels.com/photos/18002619/pexels-photo-18002619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', cap:'«Обманчив твоей неподвижности вид»', cls:'t-f', r:'.8deg'}
+  ],
+  music:[
+    {a:'Мумий Тролль', t:'Владивосток 2000', y:'1997', why:'Порт, море, движение и тревога — стихия, которая «дышит»; альбом «Морская» целиком о воде.', tags:['море','движение']},
+    {a:'Мумий Тролль', t:'Утекай', y:'1997', why:'Вода как образ ускользания и свободы: та же двойственность «безмолвия» и силы.', tags:['стихия','свобода']},
+    {a:'Дельфин', t:'Весна', y:'2004', why:'Глубокое, спокойное снаружи и тревожное внутри звучание — почти дословный аналог финала элегии.', tags:['глубина','тревога']},
+    {a:'Сплин', t:'Выхода нет', y:'1999', why:'Смятение и «бездна»: эмоциональная амплитуда от покоя к буре.', tags:['смятение','буря']},
+    {a:'Земфира', t:'Хочешь?', y:'2000', why:'Напряжение любви, которая «дрожит» за другого, — ключ к последней строке Жуковского.', tags:['любовь','тревога']},
+    {a:'Ночные Снайперы', t:'Катастрофически', y:'2000', why:'Стихия и бездна в самом голосе: чувство накрывает, как волна, — прямое созвучие «смятенной любви» и «тревожной думе» моря.', tags:['стихия','бездна']},
+    {a:'Аквариум', t:'Город золотой', y:'1986', why:'Небо и свет, «под небом голубым» — образ идеала, к которому тянется море.', tags:['небо','идеал']}
+  ],
+  bonus:'Дебюсси — «Море» (La Mer, 1905); Римский-Корсаков — «Садко»: «Океан-море». Инструментальные картины, которые звучат как прямое продолжение элегии Жуковского.'
+}
+];
+
+/* ---- викторины ---- */
+const QUIZ = [
+{ id:'cemetery', title:'Сельское кладбище', amb:'#8aa07f', desc:'Грей, Мишенское, шестистопный ямб и эпитафия певцу.', q:[
+ {t:'Чей английский оригинал лёг в основу элегии Жуковского 1802 года?',
+  o:['Роберт Бёрнс, «Весёлые нищие»','Томас Грей, «Элегия, написанная на сельском кладбище»','Уильям Блейк, «Песни невинности»','Вальтер Скотт, «Песнь последнего менестреля»'], c:1,
+  e:'Жуковский вольно перевёл знаменитую элегию Томаса Грея (1751). Перевод был настолько самостоятельным, что считается началом русской философской элегии.'},
+ {t:'Когда и где стихотворение было напечатано впервые?',
+  o:['1799, «Приятное и полезное препровождение времени»','1802, «Вестник Европы», № 24','1806, «Вестник Европы», № 10','1823, альманах «Полярная звезда»'], c:1,
+  e:'1802 год, «Вестник Европы», часть 6, № 24, страницы 319—325, с посвящением «А. И. Т—у».'},
+ {t:'Кому Жуковский посвятил «Сельское кладбище»?',
+  o:['Н. М. Карамзину','А. С. Пушкину','А. И. Тургеневу','К. Н. Батюшкову'], c:2,
+  e:'Посвящение адресовано Андрею Ивановичу Тургеневу — другу юности по Московскому Благородному пансиону, рано умершему в 1803 году.'},
+ {t:'Каким размером написана элегия 1802 года?',
+  o:['Четырёхстопный ямб','Шестистопный ямб','Хорей','Дактиль'], c:1,
+  e:'Шестистопный ямб с перекрёстной рифмовкой — «медлительный» стих, который замедляет чтение и создаёт торжественно-печальную интонацию.'},
+ {t:'Зачем в элегии названы имена Гампдена, Кромвеля и Мильтона?',
+  o:['Это имена соседей поэта по Мишенскому','Это библейские персонажи','Это герои английских баллад','Это великие англичане, чья судьба могла бы ждать простых селян, не будь они бедны'], c:3,
+  e:'Жуковский говорит о нереализованном величии: под скромными могилами могли бы покоиться защитник народа, непорочный вождь и великий поэт — но «просвещенья храм… был для них затворен».'},
+ {t:'Кому посвящены финальные строфы — «эпитафия»?',
+  o:['Безвестному селянину','Самому поэту — «певцу уединенному»','Другу-декабристу','Императору Александру I'], c:1,
+  e:'«А ты, почивших друг, певец уединенный, / И твой ударит час…» — это автопортрет: поэт примеряет на себя судьбу того, о ком будет рассказывать прохожему старый селянин.'},
+ {t:'Что Жуковский сделал с этим сюжетом спустя 37 лет?',
+  o:['Написал продолжение — поэму о селянине','Перевёл элегию Грея заново, гекзаметром','Положил её на музыку','Переработал в балладу'], c:1,
+  e:'В 1839 году появился второй перевод — «Колокол поздний кончину отшедшего дня возвещает…», написанный гекзаметром и гораздо более близкий к подлиннику.'}
+]},
+{ id:'evening', title:'Вечер', amb:'#d08a3e', desc:'Ручей, луна, друзья юности и «петь есть мой удел».', q:[
+ {t:'В каком году было написано и опубликовано стихотворение «Вечер»?',
+  o:['1802','1806','1813','1822'], c:1,
+  e:'1806 год; напечатано в «Вестнике Европы», № 10. Это первое полностью «своё» крупное стихотворение Жуковского.'},
+ {t:'С какого образа начинается элегия?',
+  o:['С морского прибоя','С колокольного звона','С ручья, бегущего по светлому песку','С метели над полями'], c:2,
+  e:'«Ручей, виющийся по светлому песку, / Как тихая твоя гармония приятна!» — ручей, стремящийся к реке, сразу работает как символ жизни.'},
+ {t:'Какое светило «встает из-за холмов» в середине стихотворения?',
+  o:['Утренняя звезда','Комета','Солнце','Ущербная луна'], c:3,
+  e:'«Луны ущербный лик встает из-за холмов…» — именно этот момент переводит элегию от пейзажа к воспоминанию.'},
+ {t:'О чём вспоминает лирический герой во второй части?',
+  o:['О войне с Наполеоном','О друзьях юности и ушедших днях','О службе при императорском дворе','О путешествии в Италию'], c:1,
+  e:'«О дней моих весна, как быстро скрылась ты!..» Герой вспоминает пансионский дружеский круг; одна из строф — о рано умершем друге.'},
+ {t:'Кому из друзей, по мнению исследователей, посвящены строки «Один — минутный цвет — почил, и непробудно…»?',
+  o:['Андрею Тургеневу','Александру Пушкину','Алексею Мерзлякову','Николаю Гоголю'], c:0,
+  e:'Речь о Андрее Тургеневе, умершем в 1803 году, — тому самому, кому посвящено «Сельское кладбище».'},
+ {t:'Какова метрика «Вечера»?',
+  o:['Хорей с парной рифмовкой','Пятистопный ямб','Разностопный ямб: шестистопные строки чередуются с четырёхстопной','Амфибрахий без рифмы'], c:2,
+  e:'Длинные шестистопные строки описывают пейзаж, а укороченная четвёртая строка «обрывает» мысль — так рождается интонация задумчивости.'},
+ {t:'Что означают имена Альпин и Минвана в финале?',
+  o:['Имена античных богов','Условные пастушеские имена друзей-поэтов','Имена героев баллады','Имена детей Жуковского'], c:1,
+  e:'Это «поэтические маски» в духе идиллической традиции XVIII века: под ними Жуковский и его друзья. «Придет сюда Альпин в час вечера мечтать / Над тихой юноши могилой!»'}
+]},
+{ id:'sea', title:'Море', amb:'#4d8fa8', desc:'Белый стих, амфибрахий и тайна двух стихий.', q:[
+ {t:'В каком году создано стихотворение «Море»?',
+  o:['1802','1806','1822','1837'], c:2,
+  e:'1822 год — поздняя, зрелая элегия Жуковского, написанная уже в пору службы при дворе.'},
+ {t:'Где «Море» было напечатано впервые?',
+  o:['В журнале «Вестник Европы»','В альманахе «Полярная звезда» на 1823 год','В журнале «Современник»','В сборнике «Арзамас»'], c:1,
+  e:'Альманах издавали К. Ф. Рылеев и А. А. Бестужев — будущие декабристы.'},
+ {t:'Каким размером написано стихотворение?',
+  o:['Шестистопный ямб','Хорей','Четырёхстопный амфибрахий','Трёхстопный анапест'], c:2,
+  e:'«БеЗМОЛВное МОре, лаЗУРное МОре» — ударение на каждом втором слоге трёхсложной стопы: ритм качается, как волна.'},
+ {t:'Есть ли в «Море» рифма?',
+  o:['Да, перекрёстная','Да, кольцевая','Да, парная','Нет — это белый стих'], c:3,
+  e:'Все 28 строк нерифмованны. Отсутствие рифмы — приём: стих дышит свободно, как сама стихия.'},
+ {t:'Какое средство выразительности является основой всего текста?',
+  o:['Олицетворение','Сарказм','Гипербола','Литота'], c:0,
+  e:'Море «живо», «дышит», «льётся», «бьётся», «воет», «дрожит» — оно наделено душой, поэтому элегия философская, а не описательная.'},
+ {t:'Что символизирует небо в элегии?',
+  o:['Власть государя','Недостижимый идеал, вечную гармонию','Городскую суету','Военную славу'], c:1,
+  e:'Море тянется к небу «из земныя неволи»: небо — идеал, божественный мир, к которому стремится человеческая душа.'},
+ {t:'Как понять финальную строку «Ты, небом любуясь, дрожишь за него»?',
+  o:['Море боится затопить берег','Даже в покое море хранит тревогу: душа, познавшая гармонию, боится её утратить','Поэт предупреждает о буре','Море отражает небо как зеркало'], c:1,
+  e:'Это главная мысль элегии: любовь делает душу уязвимой навсегда. Покой обманчив — «ты в бездне покойной скрываешь смятенье».'}
+]}
+];
+
+const TIMELINE = [
+ ['1783','Родился в селе Мишенском','29 января (9 февраля) в семье тульского помещика Афанасия Бунина и пленной турчанки Сальхи. При крещении получил фамилию и дворянство крёстного отца — Андрея Григорьевича Жуковского.'],
+ ['1797','Московский университетский Благородный пансион','Поступил в пансион, где сблизился с Андреем и Николаем Тургеневыми, Алексеем Мерзляковым. Начало литературных опытов и переводов.'],
+ ['1802','«Сельское кладбище»','Вольный перевод элегии Томаса Грея опубликован в «Вестнике Европы» с посвящением А. И. Тургеневу. Жуковский считал это началом своего пути.'],
+ ['1806','«Вечер»','Первая «настоящая» элегия: пейзаж становится исповедью. Публикация в «Вестнике Европы», № 10.'],
+ ['1808','«Людмила»','Первая русская романтическая баллада — по мотивам Бюргера. Новый жанр входит в русскую литературу.'],
+ ['1812','«Певец во стане русских воинов»','Ода-песнь о войне 1812 года приносит Жуковскому всероссийскую славу. Он поступает в ополчение.'],
+ ['1813','«Светлана»','Самая известная баллада поэта; позднее это имя станет его арзамасским прозвищем.'],
+ ['1815','Кружок «Арзамас»','Участвует в «Арзамасе» — литературном обществе, противостоящем «Беседе любителей русского слова». Дружба с юным Пушкиным.'],
+ ['1817','Служба при дворе','Назначен учителем русского языка великой княгини Александры Фёдоровны; позже — наставник цесаревича Александра Николаевича.'],
+ ['1819','«Невыразимое»','Философская элегия о границах слова — подготовка к «Морю».'],
+ ['1822','«Море»','Вершина русской философской элегии: 28 строк белого стиха о душе и небе.'],
+ ['1833','Слова гимна','Пишет текст «Боже, Царя храни!» — гимна Российской империи.'],
+ ['1837','Последние дни Пушкина','Находится рядом с умирающим поэтом, хлопочет о его бумагах и семье. В этом же году едет с цесаревичем в путешествие по России.'],
+ ['1841','Отставка и брак','Выходит в отставку с чином тайного советника, женится на Елизавете Рейтерн и поселяется в Германии.'],
+ ['1849','«Одиссея» Гомера','Выходит многолетний труд — перевод гомеровской «Одиссеи», ставший классическим.'],
+ ['1852','Смерть в Баден-Бадене','12 (24) апреля Жуковский умирает; прах перевезён в Петербург и погребён на Тихвинском кладбище Александро-Невской лавры.']
+];
+
+/* =========================================================
+   РЕНДЕР
+   ========================================================= */
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* --- триптих в герое --- */
+const trip = $('#triptych');
+WORKS.forEach((w,i)=>{
+  const rot = [-2.2,1.6,-1.1][i], ty = [0,-18,0][i];
+  const a = document.createElement('a');
+  a.className='plate'; a.href='#w-'+w.id; a.style.setProperty('--rot',rot+'deg'); a.style.setProperty('--ty',ty+'px');
+  a.innerHTML =
+    '<span class="frame"><img src="'+w.img+'" alt="'+esc(w.title)+'" loading="lazy"><span class="veil"></span></span>'+
+    '<span class="pl-body"><span class="yr">'+w.num+' · '+w.year+' · '+w.genre+'</span>'+
+    '<h3>'+esc(w.title)+'</h3><span class="peek">«'+esc(w.peek)+'»</span>'+
+    '<span class="go">Читать и разбирать <i>→</i></span></span>';
+  trip.appendChild(a);
+});
+
+/* --- хронология --- */
+const tl = $('#tl');
+TIMELINE.forEach(([y,t,d],i)=>{
+  const it = document.createElement('div');
+  it.className='tl-item'; it.tabIndex=0; it.setAttribute('role','button');
+  it.innerHTML='<div class="tl-head"><span class="tl-yr">'+y+'</span><span class="tl-t">'+t+'</span><span class="tl-plus">+</span></div>'+
+    '<div class="tl-body"><p>'+d+'</p></div>';
+  const tog=()=>{
+    const open = it.classList.toggle('open');
+    it.querySelector('.tl-body').style.maxHeight = open ? it.querySelector('.tl-body').scrollHeight+'px' : '0px';
+  };
+  it.addEventListener('click',tog);
+  it.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});
+  tl.appendChild(it);
+});
+
+/* --- секции произведений --- */
+const worksRoot = $('#works');
+function poemHTML(w){
+  return w.poem.map((st,i)=>'<div class="st" data-i="'+i+'">'+st.split('\n').map(l=>'<span class="ln">'+esc(l)+'</span>').join('')+'</div>').join('');
+}
+function renderWork(w){
+  const sec = document.createElement('section');
+  sec.className='blk work'; sec.id='w-'+w.id; sec.dataset.ambkey=w.amb;
+  const tabs = [['text','Текст'],['hist','История создания'],['an','Анализ'],['col','Коллаж'],['mus','Музыка']];
+  sec.innerHTML =
+  '<div class="inner">'+
+    '<div class="workhead reveal">'+
+      '<span class="rn">'+w.num+'</span>'+
+      '<div><p class="kicker">Произведение '+w.num+' · '+w.year+'</p>'+
+      '<h2>'+esc(w.title)+'</h2><p class="epi">'+esc(w.epi)+'</p>'+
+      '<div class="chips">'+
+        '<span class="chip"><b>Жанр:</b> '+w.genre+'</span>'+
+        '<span class="chip"><b>Размер:</b> '+w.size+'</span>'+
+        '<span class="chip"><b>Публикация:</b> '+w.first+'</span>'+
+      '</div></div>'+
+      '<div class="headart"><img src="'+w.img+'" alt="'+esc(w.title)+'" loading="lazy"></div>'+
+    '</div>'+
+
+    '<div class="tabs" role="tablist" aria-label="Разделы произведения «'+esc(w.title)+'»">'+
+      tabs.map((t,i)=>'<button class="tab" role="tab" aria-selected="'+(i===0)+'" data-tab="'+t[0]+'">'+t[1]+'</button>').join('')+
+    '</div>'+
+
+    /* ТЕКСТ */
+    '<div class="panel on" data-panel="text" role="tabpanel">'+
+      '<div class="reader-tools">'+
+        '<button class="mini" data-act="minus">A−</button>'+
+        '<button class="mini" data-act="plus">A+</button>'+
+        '<button class="mini" data-act="nums">Нумерация строф</button>'+
+        '<button class="mini" data-act="read">▶ Прочитать вслух</button>'+
+        '<button class="mini" data-act="stop" style="display:none">■ Остановить</button>'+
+        '<span style="color:var(--muted);font-size:11px;letter-spacing:.1em;margin-left:auto">Наведите на строфу — она подсветится</span>'+
+      '</div>'+
+      '<div class="scrollbox">'+
+        '<h3 class="ptitle">'+esc(w.ptitle)+'</h3>'+
+        '<p class="psub">'+esc(w.psub)+'</p>'+
+        '<div class="poem" style="--pfz:19px">'+poemHTML(w)+'</div>'+
+        '<p class="pnote">'+esc(w.pnote)+'</p>'+
+      '</div>'+
+    '</div>'+
+
+    /* ИСТОРИЯ */
+    '<div class="panel" data-panel="hist" role="tabpanel">'+
+      '<div class="two">'+
+        '<div class="story">'+w.history.map(h=>'<h3>'+esc(h.h)+'</h3><p>'+h.p+'</p>').join('')+'</div>'+
+        '<aside class="aside"><h4>'+esc(w.asideTitle)+'</h4><ul>'+
+          w.aside.map(a=>'<li><span>'+a[0]+'</span>'+esc(a[1])+'</li>').join('')+
+        '</ul></aside>'+
+      '</div>'+
+    '</div>'+
+
+    /* АНАЛИЗ */
+    '<div class="panel" data-panel="an" role="tabpanel">'+
+      '<div class="two">'+
+        '<div>'+
+          '<div class="an-block"><h3>Тема и идея</h3>'+w.analysis.idea+'</div>'+
+          '<div class="an-block"><h3>Композиция</h3><div class="comp">'+
+            w.analysis.comp.map(c=>'<div class="comp-step"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>').join('')+
+          '</div></div>'+
+        '</div>'+
+        '<div>'+
+          '<div class="an-block"><h3>Темы и мотивы</h3><div class="pillrow">'+
+            w.analysis.themes.map(t=>'<span class="pill">'+esc(t)+'</span>').join('')+'</div></div>'+
+          '<div class="an-block"><h3>Художественные средства</h3>'+
+            '<p style="color:var(--muted);font-weight:300;font-size:15.5px;margin:0 0 12px">Нажмите на приём — откроется определение и пример из текста.</p>'+
+            w.analysis.dev.map((d,i)=>'<div class="dev" data-dev="'+i+'"><button><span>'+esc(d[0])+'</span><i>▾</i></button>'+
+              '<div class="body"><div>'+esc(d[1])+'<q>'+esc(d[2])+'</q></div></div></div>').join('')+
+          '</div>'+
+          '<div class="an-block"><h3>Вопросы для размышления</h3><ol style="margin:0;padding-left:20px;color:#c6d2d5;font-weight:300">'+
+            w.analysis.ask.map(a=>'<li style="margin-bottom:9px">'+esc(a)+'</li>').join('')+'</ol></div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    /* КОЛЛАЖ */
+    '<div class="panel" data-panel="col" role="tabpanel">'+
+      '<p class="lede" style="margin-bottom:22px;max-width:70ch">Визуальный ряд к произведению: фотографии, подобранные по настроению текста, и строки, которые они иллюстрируют. Нажмите на фрагмент — откроется крупный вид.</p>'+
+      '<div class="collage">'+w.collage.map((c,i)=>{
+        if(c.q) return '<figure class="tile q '+c.cls+'" style="--r:'+c.r+'"><p>'+esc(c.q)+'</p></figure>';
+        return '<figure class="tile '+c.cls+'" style="--r:'+c.r+'" data-lb="'+w.id+'" data-i="'+i+'">'+
+          '<img src="'+c.src+'" alt="'+esc(c.cap)+'" loading="lazy"><figcaption>'+esc(c.cap)+'</figcaption></figure>';
+      }).join('')+'</div>'+
+    '</div>'+
+
+    /* МУЗЫКА */
+    '<div class="panel" data-panel="mus" role="tabpanel">'+
+      '<div class="mus-note"><span>♪</span><div><b>Подборка по настроению.</b> Прослушивание на сайте не встроено: ниже — список русских композиций без нецензурной лексики, которые можно сопоставить с этим текстом на уроке или при самостоятельном чтении. Ссылки ведут на поиск в Яндекс Музыке и VK Музыке.</div></div>'+
+      w.music.map(m=>{
+        const q = encodeURIComponent(m.a+' '+m.t);
+        return '<div class="track"><div class="eq"><i></i><i></i><i></i><i></i></div>'+
+        '<div><div class="art">'+esc(m.a)+'</div><div class="ttl">«'+esc(m.t)+'»</div>'+
+        '<div class="why">'+esc(m.why)+'</div>'+
+        '<div class="links">'+
+          '<a class="lnk" target="_blank" rel="noopener" href="https://music.yandex.ru/search?text='+q+'">Яндекс Музыка</a>'+
+          '<a class="lnk" target="_blank" rel="noopener" href="https://vk.com/audio?q='+q+'">VK Музыка</a>'+
+          '<a class="lnk" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+q+'">YouTube</a>'+
+        '</div></div>'+
+        '<div class="yr">'+esc(m.y)+'<br>'+m.tags.map(t=>'<span style="color:var(--amb2);font-size:10px;letter-spacing:.12em">#'+esc(t)+'</span>').join(' ')+'</div></div>';
+      }).join('')+
+      '<div class="bonus"><b>Бонус · классика без слов</b>'+esc(w.bonus)+'</div>'+
+      '<div style="margin-top:18px"><button class="mini" data-copy="'+w.id+'">Скопировать список треков</button></div>'+
+    '</div>'+
+  '</div>';
+  return sec;
+}
+WORKS.forEach(w=>worksRoot.appendChild(renderWork(w)));
+
+/* =========================================================
+   ИНТЕРАКТИВ
+   ========================================================= */
+
+/* вкладки */
+$$('.tabs').forEach(tabs=>{
+  const sec = tabs.closest('section');
+  tabs.addEventListener('click',e=>{
+    const b = e.target.closest('.tab'); if(!b) return;
+    $$('.tab',tabs).forEach(t=>t.setAttribute('aria-selected', String(t===b)));
+    $$('.panel',sec).forEach(p=>p.classList.toggle('on', p.dataset.panel===b.dataset.tab));
+  });
+});
+tabsKeyboard();
+function tabsKeyboard(){
+  $$('.tabs').forEach(tabs=>{
+    tabs.addEventListener('keydown',e=>{
+      const list=$$('.tab',tabs); const i=list.indexOf(document.activeElement);
+      if(i<0) return;
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+        e.preventDefault();
+        const n=(i+(e.key==='ArrowRight'?1:-1)+list.length)%list.length;
+        list[n].focus(); list[n].click();
+      }
+    });
+  });
+}
+
+/* инструменты чтения */
+$$('.panel[data-panel="text"]').forEach(panel=>{
+  const poem = $('.poem',panel);
+  let fz = 19;
+  panel.addEventListener('click',e=>{
+    const b=e.target.closest('.mini'); if(!b) return;
+    const act=b.dataset.act;
+    if(act==='plus'||act==='minus'){
+      fz = Math.max(14, Math.min(30, fz + (act==='plus'?1.5:-1.5)));
+      poem.style.setProperty('--pfz', fz+'px');
+    }
+    if(act==='nums'){ poem.classList.toggle('num'); b.classList.toggle('act'); }
+    if(act==='read'){ startRead(panel); }
+    if(act==='stop'){ stopRead(); }
+  });
+});
+
+let readIdx=-1, reading=false, readPanel=null;
+function stopRead(){
+  reading=false;
+  if('speechSynthesis' in window) speechSynthesis.cancel();
+  $$('.poem .st.speaking').forEach(s=>s.classList.remove('speaking'));
+  $$('[data-act="stop"]').forEach(b=>b.style.display='none');
+  $$('[data-act="read"]').forEach(b=>{b.textContent='▶ Прочитать вслух';b.classList.remove('act');});
+}
+function startRead(panel){
+  if(!('speechSynthesis' in window)){ alert('Ваш браузер не поддерживает синтез речи. Попробуйте Chrome или Edge.'); return; }
+  if(reading){ stopRead(); return; }
+  reading=true; readPanel=panel; readIdx=-1;
+  const readBtn=$('[data-act="read"]',panel), stopBtn=$('[data-act="stop"]',panel);
+  readBtn.textContent='❚❚ Пауза чтения'; readBtn.classList.add('act'); stopBtn.style.display='';
+  const sts=$$('.poem .st',panel);
+  const speakNext=()=>{
+    if(!reading) return;
+    readIdx++;
+    if(readIdx>=sts.length){ stopRead(); return; }
+    sts.forEach(s=>s.classList.remove('speaking'));
+    const st=sts[readIdx]; st.classList.add('speaking');
+    st.scrollIntoView({block:'center',behavior:'smooth'});
+    const u=new SpeechSynthesisUtterance(st.innerText.replace(/\s+/g,' '));
+    u.lang='ru-RU'; u.rate=.9; u.pitch=.95;
+    const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('ru'));
+    if(v) u.voice=v;
+    u.onend=speakNext; u.onerror=()=>{};
+    speechSynthesis.speak(u);
+  };
+  speakNext();
+}
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged=()=>{}; }
+
+/* художественные средства */
+$$('.dev').forEach(d=>{
+  d.querySelector('button').addEventListener('click',()=>{
+    const open=d.classList.toggle('open');
+    const body=d.querySelector('.body');
+    body.style.maxHeight = open ? body.scrollHeight+'px' : '0px';
+  });
+});
+
+/* копирование списка музыки */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy]'); if(!b) return;
+  const w=WORKS.find(x=>x.id===b.dataset.copy);
+  const txt='Музыкальная подборка к произведению В. А. Жуковского «'+w.title+'» ('+w.year+'):\n'+
+    w.music.map((m,i)=>(i+1)+'. '+m.a+' — «'+m.t+'» ('+m.y+') — '+m.why).join('\n')+
+    '\n\nБонус (классика без слов): '+w.bonus;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const old=b.textContent; b.textContent='✓ Скопировано'; b.classList.add('act');
+    setTimeout(()=>{b.textContent=old;b.classList.remove('act');},1800);
+  }).catch(()=>alert('Не удалось скопировать — выделите список вручную.'));
+});
+
+/* лайтбокс */
+const lb=$('#lb'), lbimg=$('#lbimg'), lbcap=$('#lbcap');
+let lbList=[], lbPos=0;
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.tile[data-lb]'); if(!t) return;
+  const w=WORKS.find(x=>x.id===t.dataset.lb);
+  lbList=w.collage.filter(c=>c.src);
+  lbPos=lbList.findIndex(c=>c.src===w.collage[t.dataset.i].src);
+  showLB();
+});
+function showLB(){
+  const c=lbList[lbPos]; if(!c) return;
+  lbimg.src=c.src; lbimg.alt=c.cap; lbcap.textContent=c.cap+'  ·  '+(lbPos+1)+' / '+lbList.length;
+  lb.classList.add('on'); document.body.style.overflow='hidden';
+}
+function closeLB(){ lb.classList.remove('on'); document.body.style.overflow=''; }
+$('#lbx').addEventListener('click',closeLB);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+$('#lbp').addEventListener('click',()=>{lbPos=(lbPos-1+lbList.length)%lbList.length;showLB();});
+$('#lbn').addEventListener('click',()=>{lbPos=(lbPos+1)%lbList.length;showLB();});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')closeLB();
+  if(e.key==='ArrowLeft')$('#lbp').click();
+  if(e.key==='ArrowRight')$('#lbn').click();
+});
+
+/* словарь */
+const GLOSS=[
+ ['Денница','Утренняя заря, утренняя звезда; в высокой поэзии — начало дня.','«Денницы тихий глас, дня юного дыханье…»',['cemetery']],
+ ['Персть','Прах, пыль; в библейской традиции — вещество человеческого тела.','«Надменный мавзолей лишь персть их бременит.»',['cemetery']],
+ ['Вотще','Напрасно, тщетно, без всякого результата.','«Вотще над мертвыми, истлевшими костями / Трофеи зиждутся…»',['cemetery']],
+ ['Зиждутся','Возводятся, строятся; от «зиждить» — создавать, основывать.','«Трофеи зиждутся, надгробия блестят»',['cemetery']],
+ ['Праотцы','Далёкие предки, отцы рода.','«Здесь праотцы села, в гробах уединенных…»',['cemetery']],
+ ['Наперсник','Ближайший доверенный человек, любимец судьбы.','«А вы, наперсники фортуны ослепленны…»',['cemetery']],
+ ['Гробожитель','Обитатель гроба — редкое слово, придуманное самим Жуковским.','«И гробожитель-червь в сухой главе гнездится…»',['cemetery']],
+ ['Ле́та','Годы, возраст, срок жизни.','«Их ле́та, имена потщившись начертать»',['cemetery']],
+ ['Убогий','Бедный, нищий; здесь — незаметный, лишённый достатка.','«…презрения внимают / Таящимся во тьме убогого делам»',['cemetery']],
+ ['Мавзолей','Пышное надгробное сооружение; знак посмертной славы.','«Надменный мавзолей лишь персть их бременит.»',['cemetery']],
+ ['Цевница','Свирель, пастушеская дудочка; символ поэтического творчества.','«Приди, о муза благодатна, / В венке из юных роз, с цевницею златой»',['evening']],
+ ['Оратай','Пахарь — старинное славянское слово.','«И, плуги обратив, по глыбистым браздам / С полей оратаи съезжают…»',['evening']],
+ ['Бразда','Борозда, вспаханная полоса земли.','«…по глыбистым браздам»',['evening']],
+ ['Струг','Старинное гребное судно, большая лодка.','«Когда пловцы шумят, скликаясь по стругам»',['evening']],
+ ['Филомела','Соловей; по греческому мифу — царевна, обращённая в соловья.','«В лесу стенанье филомелы…»',['evening']],
+ ['Зефир','Западный ветер; в поэзии — лёгкое тёплое дуновение.','«Как тихо веянье зефира по водам»',['evening']],
+ ['Вакховы пиры','Дружеские застолья в честь Вакха, бога вина.','«Где Вакховы пиры при шуме зимних вьюг?»',['evening']],
+ ['Ущербный лик','Убывающая, неполная луна («ущерб» — убыль).','«Луны ущербный лик встает из-за холмов…»',['evening']],
+ ['Петел','Старинная форма слова «петух».','«Глас петела вдали уснувши будит селы»',['evening']],
+ ['Альпин и Минвана','Условные пастушеские имена — «поэтические маски» друзей.','«Придет сюда Альпин в час вечера мечтать…»',['evening']],
+ ['Лоно','Недра, поверхность, вместилище чего-либо.','«Что движет твое необъятное лоно?»',['sea']],
+ ['Светозарный','Озарённый светом, сияющий, светоносный.','«Ты льешься его светозарной лазурью»',['sea']],
+ ['Подъемлешь','Поднимаешь — высокий славянизм.','«Ты бьешься, ты воешь, ты волны подъемлешь»',['sea']],
+ ['Земная неволя','Заточение в материальном мире, несвобода земли.','«Иль тянет тебя из земныя неволи…»',['sea']],
+ ['Мгла','Густой туман, непроглядная темнота.','«Ты рвешь и терзаешь враждебную мглу…»',['sea']],
+ ['Белый стих','Стих с размером, но без рифмы — приём «Моря».','Все 28 строк «Моря» написаны белым стихом.',['sea']],
+ ['Элегия','Жанр: печальное размышление о времени, утратах и смерти.','Все три стихотворения — элегии.',['all']],
+ ['Славянизмы','Слова церковнославянского происхождения, возвышающие речь.','«денница», «персть», «вотще», «глас», «зиждутся»',['all']],
+ ['Олицетворение','Наделение природы свойствами живого существа.','«Уже бледнеет день»; «Ты живо; ты дышишь»',['all']]
+];
+const GC={cemetery:'#b3c9a4',evening:'#eab269',sea:'#8ac9dd',all:'#d9b468'};
+const GN={cemetery:'Сельское кладбище',evening:'Вечер',sea:'Море',all:'все три текста'};
+const ggrid=$('#glossgrid');
+function drawGloss(){
+  const q=($('#glossSearch').value||'').trim().toLowerCase();
+  const f=$('#gfilters .mini.act').dataset.f;
+  let n=0;
+  ggrid.innerHTML='';
+  GLOSS.forEach(([term,mean,ex,ws])=>{
+    const okF = f==='all' || ws.includes(f);
+    const okQ = !q || term.toLowerCase().includes(q) || mean.toLowerCase().includes(q) || ex.toLowerCase().includes(q);
+    if(!okF||!okQ) return;
+    n++;
+    const key=ws[0];
+    const d=document.createElement('article');
+    d.className='gword'; d.style.setProperty('--gc',GC[key]);
+    d.innerHTML='<span class="gtag">'+GN[key]+'</span><b>'+esc(term)+'</b><p class="gm">'+esc(mean)+'</p><p class="gq">'+esc(ex)+'</p>';
+    ggrid.appendChild(d);
+  });
+  $('#gcount').textContent='Найдено: '+n+' из '+GLOSS.length;
+  $('#gempty').style.display = n? 'none':'block';
+}
+$('#glossSearch').addEventListener('input',drawGloss);
+$$('#gfilters .mini').forEach(b=>b.addEventListener('click',()=>{
+  $$('#gfilters .mini').forEach(x=>x.classList.toggle('act',x===b));
+  drawGloss();
+}));
+drawGloss();
+
+/* викторины */
+const qcards=$('#qcards'), qArea=$('#quizArea');
+let quizState={};
+QUIZ.forEach(q=>{
+  const c=document.createElement('button');
+  c.className='qcard'; c.style.setProperty('--c',q.amb);
+  c.innerHTML='<span class="rn2">ВИКТОРИНА · '+q.q.length+' ВОПРОСОВ</span><h3>'+esc(q.title)+'</h3><p>'+esc(q.desc)+'</p>'+
+    '<span class="st">Начать проверку →</span>';
+  c.addEventListener('click',()=>openQuiz(q.id));
+  qcards.appendChild(c);
+});
+
+function openQuiz(id){
+  const q=QUIZ.find(x=>x.id===id);
+  quizState={id,i:0,score:0,answered:false};
+  qArea.innerHTML='<div class="quiz-stage on" style="--qamb:'+q.amb+'"><div id="qBody"></div></div>';
+  const stage=$('.quiz-stage');
+  $$('.qcard').forEach(c=>c.style.opacity=c.querySelector('h3').textContent===q.title?'1':'.5');
+  renderQ();
+  stage.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function renderQ(){
+  const q=QUIZ.find(x=>x.id===quizState.id);
+  const body=$('#qBody');
+  quizState.answered=false;
+  if(quizState.i>=q.q.length){ renderResult(q); return; }
+  const cur=q.q[quizState.i];
+  body.innerHTML=
+   '<div class="qtop"><span class="qcount">Вопрос '+(quizState.i+1)+' из '+q.q.length+' · «'+esc(q.title)+'»</span>'+
+   '<span class="qprogress"><i style="width:'+((quizState.i)/q.q.length*100)+'%"></i></span>'+
+   '<span class="qcount">Верно: '+quizState.score+'</span></div>'+
+   '<div class="qtext">'+esc(cur.t)+'</div>'+
+   '<div class="opts">'+cur.o.map((o,i)=>'<button class="opt" data-i="'+i+'"><k>'+'АБВГ'[i]+'.</k><span>'+esc(o)+'</span></button>').join('')+'</div>'+
+   '<div class="expl" id="expl"></div>'+
+   '<div class="qnav"><button class="mini" id="qClose">← Вернуться к списку викторин</button>'+
+   '<button class="btn" id="qNext" style="display:none">Дальше →</button></div>';
+  $$('.opt',body).forEach(b=>b.addEventListener('click',()=>answer(b,q,cur)));
+  $('#qClose',body).addEventListener('click',()=>{qArea.innerHTML='';$$('.qcard').forEach(c=>c.style.opacity='1');});
+  $('#qNext',body).addEventListener('click',()=>{quizState.i++;renderQ();});
+}
+function answer(btn,q,cur){
+  if(quizState.answered) return;
+  quizState.answered=true;
+  const i=+btn.dataset.i, ok=(i===cur.c);
+  if(ok) quizState.score++;
+  $$('.opt').forEach((b,k)=>{b.disabled=true; if(k===cur.c)b.classList.add('right'); else if(k===i)b.classList.add('wrong');});
+  const ex=$('#expl'); ex.classList.add('on');
+  ex.innerHTML='<b>'+(ok?'Верно':'Правильный ответ: '+cur.o[cur.c])+'</b>'+esc(cur.e);
+  $('#qNext').style.display='inline-flex';
+  $('.qprogress i').style.width=((quizState.i+1)/q.q.length*100)+'%';
+}
+function renderResult(q){
+  const total=q.q.length, s=quizState.score, pct=s/total;
+  let medal='✦', verdict='Стоит перечитать';
+  if(pct===1){medal='★★★';verdict='Безупречно!'}
+  else if(pct>=.8){medal='★★';verdict='Отличный результат'}
+  else if(pct>=.6){medal='★';verdict='Хорошо, но есть над чем поработать'}
+  const body=$('#qBody');
+  body.innerHTML='<div class="result"><div class="medal">'+medal+'</div>'+
+   '<div class="score">Викторина «'+esc(q.title)+'» завершена</div>'+
+   '<div class="verdict">'+s+' из '+total+' · '+verdict+'</div>'+
+   '<p>'+(pct===1?'Ни одной ошибки — вы знаете текст и его историю так же хорошо, как знали их читатели «Вестника Европы».'
+     :pct>=.6?'Хороший результат. Загляните во вкладку «История создания» и «Анализ» — там ответы на вопросы, в которых вы ошиблись.'
+     :'Не расстраивайтесь: Жуковский сам писал, что «петь есть мой удел… но долго ль?». Откройте вкладку «Текст» и перечитайте стихотворение ещё раз.')+'</p>'+
+   '<div class="hero-cta" style="justify-content:center"><button class="btn" id="qAgain">Пройти заново</button>'+
+   '<button class="btn ghost" id="qBack">Другая викторина</button></div></div>';
+  $('#qAgain').addEventListener('click',()=>openQuiz(q.id));
+  $('#qBack').addEventListener('click',()=>{qArea.innerHTML='';$$('.qcard').forEach(c=>c.style.opacity='1');$('#quiz').scrollIntoView({behavior:'smooth'});});
+}
+
+/* печатающаяся строка */
+const QUOTES=[
+ ['Уже бледнеет день, скрываясь за горою…','«Сельское кладбище», 1802'],
+ ['Так, петь есть мой удел… но долго ль?.. Как узнать?','«Вечер», 1806'],
+ ['Ты, небом любуясь, дрожишь за него.','«Море», 1822'],
+ ['О дней моих весна, как быстро скрылась ты!','«Вечер», 1806'],
+ ['Невыразимое под пером мертвеет…','«Невыразимое», 1819']
+];
+const typeText=$('#typetext'), typeWho=$('#typewho');
+let qi=0;
+function typeQuote(){
+  const [txt,who]=QUOTES[qi%QUOTES.length];
+  typeWho.textContent=''; typeText.textContent='';
+  let i=0;
+  const iv=setInterval(()=>{
+    typeText.textContent=txt.slice(0,++i);
+    if(i>=txt.length){
+      clearInterval(iv);
+      typeWho.textContent=who;
+      setTimeout(()=>{qi++;typeQuote();},5200);
+    }
+  },34);
+}
+typeQuote();
+
+/* амбиент-канвас */
+const cv=$('#ambient'), ctx=cv.getContext('2d');
+let W=0,H=0,DPR=1, stars=[], t=0, ambColor=[77,143,168], targetColor=[77,143,168];
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  W=cv.width=innerWidth*DPR; H=cv.height=innerHeight*DPR;
+  cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px';
+  stars=[]; const n=Math.round(innerWidth*innerHeight/16000);
+  for(let i=0;i<n;i++) stars.push({x:Math.random()*W,y:Math.random()*H*.72,r:(Math.random()*1.25+.25)*DPR,p:Math.random()*6.28,s:Math.random()*.9+.25});
+}
+resize(); addEventListener('resize',resize);
+const COLOR_MAP={cemetery:[138,160,127],evening:[208,138,62],sea:[77,143,168],author:[201,163,82],quiz:[165,107,138]};
+function draw(){
+  t+=.006;
+  ambColor=ambColor.map((c,i)=>c+(targetColor[i]-c)*.018);
+  const [r,g,b]=ambColor.map(Math.round);
+  ctx.clearRect(0,0,W,H);
+  const sky=ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'rgba('+(r*.18+6|0)+','+(g*.18+9|0)+','+(b*.18+13|0)+',1)');
+  sky.addColorStop(.55,'rgba('+(r*.42+9|0)+','+(g*.40+12|0)+','+(b*.40+16|0)+',1)');
+  sky.addColorStop(1,'rgba(6,9,12,1)');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
+  /* луна */
+  const mx=W*.80, my=H*.19, mr=Math.min(W,H)*.052;
+  const gl=ctx.createRadialGradient(mx,my,mr*.4,mx,my,mr*5.5);
+  gl.addColorStop(0,'rgba(255,246,222,.40)');
+  gl.addColorStop(.35,'rgba('+r+','+g+','+b+',.14)');
+  gl.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=gl; ctx.beginPath(); ctx.arc(mx,my,mr*5.5,0,6.283); ctx.fill();
+  ctx.fillStyle='rgba(250,244,228,.9)'; ctx.beginPath(); ctx.arc(mx,my,mr,0,6.283); ctx.fill();
+  ctx.fillStyle='rgba('+(r*.2+8|0)+','+(g*.2+10|0)+','+(b*.2+14|0)+',1)';
+  ctx.beginPath(); ctx.arc(mx-mr*.42,my-mr*.22,mr*.92,0,6.283); ctx.fill();
+  /* звёзды */
+  stars.forEach(s=>{
+    const a=(Math.sin(t*2.2*s.s+s.p)*.5+.5)*.75+.15;
+    ctx.fillStyle='rgba(232,240,242,'+(a*.85).toFixed(3)+')';
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.283); ctx.fill();
+  });
+  /* волны */
+  const base=H*.78;
+  for(let L=0;L<4;L++){
+    ctx.beginPath();
+    const amp=(9+L*7)*DPR, sp=.35+L*.16, off=base+L*(H*.055), al=.055+L*.045;
+    for(let x=0;x<=W;x+=6*DPR){
+      const y=off+Math.sin(x/(150*DPR)+t*sp*4+L)*amp+Math.sin(x/(62*DPR)-t*sp*6+L*2)*amp*.4;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+    ctx.fillStyle='rgba('+r+','+g+','+b+','+al+')'; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,'+(al*.5)+')'; ctx.lineWidth=1*DPR;
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=6*DPR){
+      const y=off+Math.sin(x/(150*DPR)+t*sp*4+L)*amp+Math.sin(x/(62*DPR)-t*sp*6+L*2)*amp*.4;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+document.addEventListener('visibilitychange',()=>{ /* rAF сам приостанавливается */ });
+
+/* ============ ФОНОВАЯ МУЗЫКА ============
+   Генеративная звуковая дорожка: шум прибоя + медленный эмбиент-пад
+   + случайные ноты минорной пентатоники с эхом. Без записей и без слов. */
+const Ambient = {
+  ctx:null, master:null, running:false, built:false, sources:[], timer:null, step:0,
+  scale:[0,2,3,5,7,10,12,14], root:110,
+  build(){
+    if(this.ctx) return this.ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) throw new Error('no-audio');
+    this.ctx = new AC();
+    this.master = this.ctx.createGain(); this.master.gain.value = 0;
+    const comp = this.ctx.createDynamicsCompressor();
+    comp.threshold.value=-22; comp.ratio.value=6;
+    this.master.connect(comp); comp.connect(this.ctx.destination);
+    return this.ctx;
+  },
+  noiseBuffer(){
+    const len = Math.floor(this.ctx.sampleRate*3), b=this.ctx.createBuffer(1,len,this.ctx.sampleRate), d=b.getChannelData(0);
+    let last=0;
+    for(let i=0;i<len;i++){ const w=Math.random()*2-1; last=(last+.019*w)/1.019; d[i]=last*3.4; }
+    return b;
+  },
+  /* прибой */
+  sea(){
+    const c=this.ctx, src=c.createBufferSource(); src.buffer=this.noiseBuffer(); src.loop=true;
+    const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=430; lp.Q.value=.8;
+    const g=c.createGain(); g.gain.value=.055;
+    const lfo=c.createOscillator(); lfo.frequency.value=.085;
+    const lg=c.createGain(); lg.gain.value=260; lfo.connect(lg); lg.connect(lp.frequency);
+    const lfo2=c.createOscillator(); lfo2.frequency.value=.052;
+    const lg2=c.createGain(); lg2.gain.value=.035; lfo2.connect(lg2); lg2.connect(g.gain);
+    src.connect(lp); lp.connect(g); g.connect(this.master);
+    src.start(); lfo.start(); lfo2.start();
+    this.sources.push(src,lfo,lfo2);
+  },
+  /* непрерывный пэд: два расстроенных тона */
+  pad(){
+    const c=this.ctx;
+    [this.root, this.root*1.5, this.root*2.005].forEach((f,i)=>{
+      const o=c.createOscillator(); o.type = i===2 ? 'sine' : 'triangle'; o.frequency.value=f;
+      const g=c.createGain(); g.gain.value = i===2 ? .012 : .02;
+      const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=620;
+      const lfo=c.createOscillator(); lfo.frequency.value=.03+i*.017;
+      const lg=c.createGain(); lg.gain.value=170; lfo.connect(lg); lg.connect(lp.frequency);
+      o.connect(lp); lp.connect(g); g.connect(this.master);
+      o.start(); lfo.start(); this.sources.push(o,lfo);
+    });
+  },
+  /* одна нота с эхом */
+  note(freq, when, dur, peak){
+    const c=this.ctx;
+    const o=c.createOscillator(); o.type='triangle'; o.frequency.value=freq;
+    const o2=c.createOscillator(); o2.type='sine'; o2.frequency.value=freq*2;
+    const g=c.createGain(); const g2=c.createGain(); g2.gain.value=.25;
+    const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1700;
+    const dl=c.createDelay(1.2); dl.delayTime.value=.46;
+    const fb=c.createGain(); fb.gain.value=.34;
+    const wet=c.createGain(); wet.gain.value=.32;
+    g.gain.setValueAtTime(0,when);
+    g.gain.linearRampToValueAtTime(peak,when+dur*.28);
+    g.gain.exponentialRampToValueAtTime(.0001,when+dur);
+    o.connect(g); o2.connect(g2); g2.connect(g);
+    g.connect(lp); lp.connect(this.master);
+    lp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(this.master);
+    o.start(when); o2.start(when); o.stop(when+dur+.2); o2.stop(when+dur+.2);
+  },
+  melody(){
+    const c=this.ctx;
+    const tick=()=>{
+      if(!this.running) return;
+      const n = this.scale[Math.floor(Math.random()*this.scale.length)];
+      const oct = Math.random()<.35 ? 4 : 2;
+      const f = this.root*Math.pow(2, n/12)*oct;
+      this.note(f, c.currentTime+.05, 3.6+Math.random()*2.2, .055+Math.random()*.045);
+      if(Math.random()<.3) this.note(f*1.5, c.currentTime+1.1, 3.2, .03);
+      this.timer = setTimeout(tick, 2600+Math.random()*4200);
+    };
+    tick();
+  },
+  start(){
+    try{
+      const c=this.build();
+      if(c.state==='suspended') c.resume();
+      if(!this.built){ this.sea(); this.pad(); this.built=true; }
+      this.running=true;
+      clearTimeout(this.timer); this.melody();
+      const t=c.currentTime;
+      this.master.gain.cancelScheduledValues(t);
+      this.master.gain.setValueAtTime(this.master.gain.value,t);
+      this.master.gain.linearRampToValueAtTime(.95,t+2.8);
+      return true;
+    }catch(e){ return false; }
+  },
+  stop(){
+    if(!this.ctx) return;
+    this.running=false; clearTimeout(this.timer);
+    const t=this.ctx.currentTime;
+    this.master.gain.cancelScheduledValues(t);
+    this.master.gain.setValueAtTime(this.master.gain.value,t);
+    this.master.gain.linearRampToValueAtTime(0,t+.9);
+  }
+};
+const soundBtn=$('#soundBtn'), musicStart=$('#musicStart');
+function setMusicUI(on){
+  soundBtn.classList.toggle('on',on);
+  soundBtn.title = on ? 'Выключить фоновую музыку' : 'Включить фоновую музыку';
+  if(musicStart){
+    musicStart.textContent = on ? '♪ Музыка играет — выключить' : '♪ Включить фоновую музыку';
+    musicStart.classList.toggle('act',on);
+  }
+}
+function toggleMusic(){
+  const on = !soundBtn.classList.contains('on');
+  if(on){
+    if(!Ambient.start()){ alert('К сожалению, этот браузер не поддерживает фоновый звук.'); return; }
+  } else Ambient.stop();
+  setMusicUI(on);
+}
+soundBtn.addEventListener('click',toggleMusic);
+if(musicStart) musicStart.addEventListener('click',toggleMusic);
+
+/* навигация, прогресс, ambient-цвет */
+const topbar=$('#topbar'), bar=$('#bar'), toTop=$('#toTop');
+const sections=$$('section[data-ambkey], #hero[data-ambkey]');
+function onScroll(){
+  const st=window.scrollY, h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.width=(st/h*100)+'%';
+  topbar.classList.toggle('small', st>70);
+  toTop.classList.toggle('show', st>700);
+  let best=null,bd=1e9;
+  sections.forEach(s=>{
+    const r=s.getBoundingClientRect(), d=Math.abs(r.top-innerHeight*.35);
+    if(r.top<innerHeight*.55 && r.bottom>innerHeight*.2 && d<bd){bd=d;best=s;}
+  });
+  if(best){
+    const k=best.dataset.ambkey;
+    if(document.body.dataset.amb!==k){
+      document.body.dataset.amb=k;
+      targetColor=COLOR_MAP[k]||COLOR_MAP.sea;
+    }
+    $$('#nav a').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+best.id));
+  }
+}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+toTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+$('#burger').addEventListener('click',()=>$('#nav').classList.toggle('open'));
+$$('#nav a').forEach(a=>a.addEventListener('click',()=>$('#nav').classList.remove('open')));
+
+/* появление при прокрутке */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+$$('.reveal').forEach(el=>io.observe(el));
+/* наблюдаем и за dynamically добавленными */
+setTimeout(()=>$$('#works .reveal').forEach(el=>io.observe(el)),60);
+
+/* остановка чтения при уходе со страницы */
+addEventListener('pagehide',()=>{ if(reading) stopRead(); });
+</script>
+</body>
+</html>
